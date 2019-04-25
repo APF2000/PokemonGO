@@ -4,8 +4,9 @@ public class PokemonController extends Controller{
 		
 	private class Restart extends Event {
 		
-		Treinador esponja = new Treinador();
-		Treinador construtor = new Treinador();
+		Treinador esponja = new Treinador("Bob esponja");
+		Treinador construtor = new Treinador("Bob, o construtor");
+		
 		
 		
 		
