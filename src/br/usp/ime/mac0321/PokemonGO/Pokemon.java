@@ -1,9 +1,9 @@
 package br.usp.ime.mac0321.PokemonGO;
 
-public class Pokemon {
-	int life = 100;
-	String nome;
-	Move[] ataques = new Move[4]; 
+abstract class Pokemon {
+	protected int hp;
+	protected String nome;
+	protected Move[] ataques = new Move[4]; 
 	
 	public String action(int num_act,Pokemon inimigo) {
 		
@@ -12,7 +12,7 @@ public class Pokemon {
 		return(nome);
 	}
 	public void attackDamage (int dano) {
-		life-=dano;
+		hp -= dano;
 	}
 	public String getNome() {
 		return(nome);

@@ -11,6 +11,10 @@ abstract public class Event {
 		return System.currentTimeMillis() >= evtTime;
 	}
 	
+	public Event() {
+		System.out.println("bora");
+	}
+	
 	abstract public void action();
 	abstract public String description();
 }

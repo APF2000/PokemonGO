@@ -6,7 +6,7 @@ public class Treinador {
 	private int selecao = 0;
 	private int indice_de_pokes=0;
 	
-	void Treinador(String nome) {
+	public Treinador(String nome) {
 		this.nome=nome;
 	}
 	
@@ -19,8 +19,8 @@ public class Treinador {
 	}
 	
 	public String addPoke (Pokemon poke) {
-		pokedex[indice_de_pokes]=poke;
-		return(nome+" adicionou " poke.getNome()+" na sua pokedéx")
+		pokedex[indice_de_pokes]= poke;
+		return(nome+" adicionou " poke.getNome()+" na sua pokedex")
 	}
 	
 }
