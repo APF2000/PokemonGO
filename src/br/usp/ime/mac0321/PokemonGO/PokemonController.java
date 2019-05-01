@@ -5,12 +5,29 @@ public class PokemonController extends Controller{
 	public PokemonController() {
 		super();
 	}
+	private class Select extends Event{
+		private String saida;
+		Treinador a;
+		int selecao;
+		public Select(Treinador a, int selecao) {
+			this.a=a;
+			this.selecao=selecao;
+		}
 
+		public void action() {
+			saida=a.selectPoke(selecao);
+			
+		}
+
+		public String description() {
+			return (a.getNome() +" selecionou "+ saida);
+		}
+		
+	}
 	private class Restart extends Event {
 
-		public void action() {}
 		public String description() {
-			return "description";
+			return "";
 		}
 
 		private Treinador esponja = new Treinador("Bob esponja");
@@ -24,9 +41,18 @@ public class PokemonController extends Controller{
 			construtor.addPoke(new Charmander());
 		}
 		
+		
 		public void teste2() {
 			Restart teste = new Restart(2);
 			teste.teste1();
+		}
+		public void action() {
+			long tm = System.currentTimeMillis();
+			System.out.println("comecou a batalha");
+			addEvent(new Select(esponja,1));
+			addEvent();
+			addEvent();
+			addEvent();
 		}
 
 		public Restart(long time) {
@@ -35,7 +61,7 @@ public class PokemonController extends Controller{
 	}
 
 	public void addEvent() {
-		System.out.println("Evento adiionado");
+		System.out.println("Evento adicionado");
 	}
 	
 	public static void main(String[] args) {
