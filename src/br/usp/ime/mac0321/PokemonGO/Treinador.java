@@ -18,9 +18,9 @@ public class Treinador {
 		pokedex[selecao].action(num_mov, alvo);
 	}
 	
-	public String addPoke (Pokemon poke) {
+	public void addPoke (Pokemon poke) {
 		pokedex[indice_de_pokes++]= poke;
-		return(nome+" adicionou " + poke.getNome()+" na sua pokedex");
-	}
-	
+		System.out.println(nome+" adicionou " + 
+				poke.getNome()+" na sua pokedex");
+	}	
 }
