@@ -13,9 +13,12 @@ public class PokemonController extends Controller{
 			return "description";
 		}
 		
-		Treinador esponja = new Treinador("Bob esponja");
-		Treinador construtor = new Treinador("Bob, o construtor");
-		esponja.addPoke(new Pikachu);
+		private Treinador esponja = new Treinador("Bob esponja");
+		private Treinador construtor = new Treinador("Bob, o construtor");
+		
+		private Pikachu teste = new Pikachu();
+		
+		
 		esponja.addPoke(new Gyarados);
 		construtor.addPoke(new Bubasauro);
 		construtor.addPoke(new Charmander);

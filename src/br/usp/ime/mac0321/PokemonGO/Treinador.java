@@ -19,8 +19,8 @@ public class Treinador {
 	}
 	
 	public String addPoke (Pokemon poke) {
-		pokedex[indice_de_pokes]= poke;
-		return(nome+" adicionou " poke.getNome()+" na sua pokedex")
+		pokedex[indice_de_pokes++]= poke;
+		return(nome+" adicionou " + poke.getNome()+" na sua pokedex");
 	}
 	
 }

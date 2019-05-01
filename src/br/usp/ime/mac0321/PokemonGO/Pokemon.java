@@ -5,6 +5,10 @@ abstract class Pokemon {
 	protected String nome;
 	protected Move[] ataques = new Move[4]; 
 	
+	public Pokemon() {
+		System.out.println("Nasceu um Pokemon");
+	}
+	
 	public String action(int num_act,Pokemon inimigo) {
 		
 		inimigo.attackDamage(ataques[num_act].damage());
