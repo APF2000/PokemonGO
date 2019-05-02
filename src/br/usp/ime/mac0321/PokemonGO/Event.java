@@ -8,7 +8,7 @@ public class Event {
 		evtTime = eventTime;
 	}	
 	public Event() {
-		System.out.println("bora");
+		//System.out.println("bora");
 	}
 	
 	public void setTime(long tm) {

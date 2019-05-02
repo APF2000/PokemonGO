@@ -18,10 +18,12 @@ public class Treinador {
 		return(nome + " selecionou " + pokedex[selecao].getNome());
 	}
 	public void movimento (int num_mov,Pokemon alvo) {
+		System.out.println("teste: " + alvo.getNome());
 		pokedex[selecao].action(num_mov, alvo);
 	}
 	
 	public void addPoke (Pokemon poke) {
+		System.out.println(poke.getNome());
 		pokedex[indice_de_pokes]= poke;
 		indice_de_pokes++;
 		System.out.println(nome+" adicionou " + 

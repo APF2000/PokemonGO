@@ -6,18 +6,19 @@ abstract public class Pokemon {
 	protected Move[] ataques = new Move[4];
 	protected String tipo;
 	
-	public Pokemon(){
-		
-	} 
 	
 	public String action(int num_act,Pokemon inimigo) {
 		
-		inimigo.attackDamage(ataques[num_act].damage());
+		System.out.println("NUMERO; " + num_act );
+		System.out.println("lenth " +ataques.length);
+		System.out.println("inimigo " +inimigo.getNome());
+		System.out.println("dano: " +ataques[0].damage());
+		inimigo.attackDamage(5);
 		
 		return(nome);
 	}
 	public void attackDamage (int dano) {
-		hp -= dano;
+		hp -= dano; 
 	}
 	public String getNome() {
 		return(nome);

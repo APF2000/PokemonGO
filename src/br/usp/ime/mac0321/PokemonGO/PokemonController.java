@@ -72,11 +72,6 @@ public class PokemonController extends Controller{
 		}
 		
 		
-		
-		public void teste2() {
-			Restart teste = new Restart(2);
-			teste.teste1();
-		}
 		public void action() {
 			long tm = System.currentTimeMillis();
 			
@@ -108,7 +103,7 @@ public class PokemonController extends Controller{
 	}
 
 	public void addEvent() {
-		System.out.println("Evento adicionado");
+		//System.out.println("Evento adicionado");
 	}
 	
 	public static void main(String[] args) {
