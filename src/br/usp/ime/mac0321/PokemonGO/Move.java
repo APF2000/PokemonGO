@@ -1,6 +1,6 @@
 package br.usp.ime.mac0321.PokemonGO;
 
-abstract class Move {
+public class Move {
 	private String nome;
 	private int dano;
 	

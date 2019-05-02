@@ -16,6 +16,7 @@ public class Treinador {
 	}
 	public String selectPoke (int selecao) {
 		this.selecao=selecao;
+		System.out.println(selecao);
 		return(nome + " selecionou " + pokedex[selecao].getNome());
 	}
 	public void movimento (int num_mov,Pokemon alvo) {

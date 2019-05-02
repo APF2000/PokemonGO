@@ -8,7 +8,7 @@ public class PokemonController extends Controller{
 	private class Select extends Event{
 		private String saida;
 		Treinador a;
-		int selecao;
+		int selecao=0;
 		public Select(Treinador a, int selecao) {
 			this.a=a;
 			this.selecao=selecao;
@@ -49,10 +49,9 @@ public class PokemonController extends Controller{
 		public void action() {
 			long tm = System.currentTimeMillis();
 			System.out.println("comecou a batalha");
-			addEvent(new Select(esponja,1));
-			addEvent();
-			addEvent();
-			addEvent();
+			addEvent(new Select(esponja,0));
+			addEvent(new Select(construtor,0));
+
 		}
 
 		public Restart(long time) {
