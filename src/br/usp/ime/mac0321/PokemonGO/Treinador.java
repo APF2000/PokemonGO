@@ -16,8 +16,9 @@ public class Treinador {
 	}
 	
 	public boolean noJogo() {
-		if(proxComHp()!=-1)
+		if(proxComHp()!=-1) {
 			return(nojogo);
+		}
 		else {
 			return(false);
 		}
@@ -95,7 +96,9 @@ public class Treinador {
 		}
 		else if(sel1==3) {
 			// Trocar pokemon
+			System.out.println("trocou" + sel2);
 			selecao=sel2;
+			System.out.println("trocou " + selecao);
 			saida=(nome +" trocou o seu pokemon para " + pokedex[selecao].getNome());
 		}
 		return(saida);

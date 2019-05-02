@@ -1,7 +1,7 @@
 package br.usp.ime.mac0321.PokemonGO;
 
 abstract public class Pokemon {
-	protected int hp;
+	protected int hp=100;
 	protected String nome;
 	protected Move[] ataques = new Move[4];
 	protected String tipo;

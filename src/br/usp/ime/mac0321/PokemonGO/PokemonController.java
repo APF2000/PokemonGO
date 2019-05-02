@@ -86,8 +86,10 @@ public class PokemonController extends Controller{
 			System.out.println("\nCOMECOU A BATALHA\n");
 			addEvent(new Select(esponja,0));
 			addEvent(new Select(construtor,0));
-			addEvent(new Acao(esponja,construtor,0, 0));
-
+			addEvent(new Acao(esponja,construtor,0, 1));
+			addEvent(new Acao(esponja,construtor,3, 1));
+			addEvent(new Acao(esponja,construtor,0, 1));
+			
 
 		}
 
