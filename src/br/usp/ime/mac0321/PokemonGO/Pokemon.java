@@ -8,19 +8,16 @@ abstract public class Pokemon {
 	
 	
 	public String action(int num_act,Pokemon inimigo) {
-		
-		System.out.println("NUMERO; " + num_act );
-		System.out.println("lenth " +ataques.length);
-		System.out.println("inimigo " +inimigo.getNome());
-		System.out.println("dano: " +ataques[0].damage());
-		inimigo.attackDamage(5);
-		
-		return(nome);
+		inimigo.attackDamage(ataques[num_act].damage());		
+		return(ataques[num_act].name());
 	}
 	public void attackDamage (int dano) {
 		hp -= dano; 
 	}
 	public String getNome() {
 		return(nome);
+	}
+	public int getHP() {
+		return(hp);
 	}
 }

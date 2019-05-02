@@ -8,43 +8,54 @@ public class PokemonController extends Controller{
 	private class Select extends Event{
 		private String saida;
 		Treinador a = new Treinador("Esponja");
-		int selecao=1;
+		int selecao;
+
 		public Select(Treinador a, int selecao) {
 			this.a=a;
 			this.selecao=selecao;
 		}
 
 		public void action() {
-			saida=a.selectPoke(1);
-			
+			saida=a.selectPoke(selecao);
+
 		}
 
 		public String description() {
-			return (a.getNome() +" selecionou "+ saida);
+			return ("(" + a.getNome() +") selecionou "+ saida);
 		}
-		
+
 	}
-	private class Attack extends Event{
-		private String saida;
+	private class Acao extends Event{
 		Treinador a;
 		Treinador b;
-		int selecao=0;
-		public Attack(Treinador a, Treinador b, int selecao) {
+		String move= "error 434:strign não recebida";
+		int selecao1=0;
+		int selecao2=0;
+
+		public Acao(Treinador a, Treinador b, int selecao1,int selecao2) {
 			this.a=a;
 			this.b=b;
-			this.selecao=selecao;
+			this.selecao1=selecao1;
+			this.selecao2=selecao2;
 		}
 
 		public void action() {
-			a.movimento(selecao,b.selPoke());
-			
+			if(a.noJogo()) {
+				move=a.movimentoSelect(selecao1,selecao2,b.selPoke());	
+			}
 		}
 
 		public String description() {
-			return (a.selPoke().getNome() +" atacou"+ b.selPoke().getNome());
+
+			return(move);
+			/*return ("(" + a.getNome() + ") usou " + 
+					a.selPoke().getNome() + " para atacar o "
+					+ b.selPoke().getNome()+" de ("+ b.getNome() + ") com " + move);
+			 */
 		}
-		
+
 	}
+
 	private class Restart extends Event {
 
 		public String description() {
@@ -54,27 +65,10 @@ public class PokemonController extends Controller{
 		private Treinador esponja = new Treinador("Bob esponja");
 		private Treinador construtor = new Treinador("Bob, o construtor");
 
-		public void teste1() {
-			esponja.addPoke(new Pikachu());
-			esponja.addPoke(new Gyarados());
-			esponja.addPoke(new Gardevoir());
-			esponja.addPoke(new Caterpie());
-			esponja.addPoke(new Pidgeot());
-			esponja.addPoke(new Spearow());
 
-			construtor.addPoke(new Bubasauro());
-			construtor.addPoke(new Charmander());
-			construtor.addPoke(new Rattata());
-			construtor.addPoke(new Raychu());
-			construtor.addPoke(new Cubone());
-			construtor.addPoke(new Ekans());
-			
-		}
-		
-		
 		public void action() {
 			long tm = System.currentTimeMillis();
-			
+
 			esponja.addPoke(new Pikachu());
 			esponja.addPoke(new Gyarados());
 			esponja.addPoke(new Gardevoir());
@@ -88,24 +82,24 @@ public class PokemonController extends Controller{
 			construtor.addPoke(new Raychu());
 			construtor.addPoke(new Cubone());
 			construtor.addPoke(new Ekans());
-			
-			System.out.println("comecou a batalha");
+
+			System.out.println("\nCOMECOU A BATALHA\n");
 			addEvent(new Select(esponja,0));
 			addEvent(new Select(construtor,0));
-			addEvent(new Attack(esponja,construtor,0));
-			
+			addEvent(new Acao(esponja,construtor,0, 0));
+
 
 		}
 
 		public Restart(long time) {
-			super();
+			super(time);
 		}
 	}
 
 	public void addEvent() {
 		//System.out.println("Evento adicionado");
 	}
-	
+
 	public static void main(String[] args) {
 
 		PokemonController poke = new PokemonController();
