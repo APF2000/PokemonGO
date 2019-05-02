@@ -6,7 +6,6 @@ public class Treinador {
 	private int selecao = 0;
 	private int indice_de_pokes=0;
 	
-	
 	public Treinador(String nome) {
 		this.nome=nome;
 	}
