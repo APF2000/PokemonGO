@@ -24,6 +24,27 @@ public class PokemonController extends Controller{
 		}
 		
 	}
+	private class Attack extends Event{
+		private String saida;
+		Treinador a;
+		Treinador b;
+		int selecao=0;
+		public Attack(Treinador a, Treinador b, int selecao) {
+			this.a=a;
+			this.b=b;
+			this.selecao=selecao;
+		}
+
+		public void action() {
+			a.movimento(selecao,b);
+			
+		}
+
+		public String description() {
+			return (a.getNome() +" atacou"+ b.getNome());
+		}
+		
+	}
 	private class Restart extends Event {
 
 		public String description() {
@@ -42,6 +63,7 @@ public class PokemonController extends Controller{
 		}
 		
 		
+		
 		public void teste2() {
 			Restart teste = new Restart(2);
 			teste.teste1();
@@ -51,6 +73,7 @@ public class PokemonController extends Controller{
 			System.out.println("comecou a batalha");
 			addEvent(new Select(esponja,0));
 			addEvent(new Select(construtor,0));
+			
 
 		}
 
