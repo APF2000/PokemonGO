@@ -7,15 +7,15 @@ public class PokemonController extends Controller{
 	}
 	private class Select extends Event{
 		private String saida;
-		Treinador a;
-		int selecao=0;
+		Treinador a = new Treinador("Esponja");
+		int selecao=1;
 		public Select(Treinador a, int selecao) {
 			this.a=a;
 			this.selecao=selecao;
 		}
 
 		public void action() {
-			saida=a.selectPoke(selecao);
+			saida=a.selectPoke(1);
 			
 		}
 
