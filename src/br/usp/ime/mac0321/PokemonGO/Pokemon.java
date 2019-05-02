@@ -6,9 +6,9 @@ abstract public class Pokemon {
 	protected Move[] ataques = new Move[4];
 	protected String tipo;
 	
-	public Pokemon() {
-		System.out.println("Nasceu um Pokemon");
-	}
+	public Pokemon(){
+		
+	} 
 	
 	public String action(int num_act,Pokemon inimigo) {
 		

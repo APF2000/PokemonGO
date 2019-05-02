@@ -36,12 +36,12 @@ public class PokemonController extends Controller{
 		}
 
 		public void action() {
-			a.movimento(selecao,b);
+			a.movimento(selecao,b.selPoke());
 			
 		}
 
 		public String description() {
-			return (a.getNome() +" atacou"+ b.getNome());
+			return (a.selPoke().getNome() +" atacou"+ b.selPoke().getNome());
 		}
 		
 	}
@@ -57,9 +57,18 @@ public class PokemonController extends Controller{
 		public void teste1() {
 			esponja.addPoke(new Pikachu());
 			esponja.addPoke(new Gyarados());
+			esponja.addPoke(new Gardevoir());
+			esponja.addPoke(new Caterpie());
+			esponja.addPoke(new Pidgeot());
+			esponja.addPoke(new Spearow());
 
 			construtor.addPoke(new Bubasauro());
 			construtor.addPoke(new Charmander());
+			construtor.addPoke(new Rattata());
+			construtor.addPoke(new Raychu());
+			construtor.addPoke(new Cubone());
+			construtor.addPoke(new Ekans());
+			
 		}
 		
 		
@@ -70,9 +79,25 @@ public class PokemonController extends Controller{
 		}
 		public void action() {
 			long tm = System.currentTimeMillis();
+			
+			esponja.addPoke(new Pikachu());
+			esponja.addPoke(new Gyarados());
+			esponja.addPoke(new Gardevoir());
+			esponja.addPoke(new Caterpie());
+			esponja.addPoke(new Pidgeot());
+			esponja.addPoke(new Spearow());
+
+			construtor.addPoke(new Bubasauro());
+			construtor.addPoke(new Charmander());
+			construtor.addPoke(new Rattata());
+			construtor.addPoke(new Raychu());
+			construtor.addPoke(new Cubone());
+			construtor.addPoke(new Ekans());
+			
 			System.out.println("comecou a batalha");
 			addEvent(new Select(esponja,0));
 			addEvent(new Select(construtor,0));
+			addEvent(new Attack(esponja,construtor,0));
 			
 
 		}

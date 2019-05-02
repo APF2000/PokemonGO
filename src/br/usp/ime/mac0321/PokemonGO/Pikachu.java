@@ -5,7 +5,7 @@ public class Pikachu extends Pokemon{
 	final Move[] ataques = {new Move("Raio simples",10), new Move("raio maximo",10), new Move("teste2",10), new Move("teste3",10) };
 	private String tipo = "Electric";
 	
-	public Pikachu() {
-		System.out.println("Naceu um pikachu");
+	public Pidgey() {
+		super();
 	}
 }
