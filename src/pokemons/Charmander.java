@@ -1,4 +1,4 @@
-package br.usp.ime.mac0321.PokemonGO;
+package pokemons;
 
 public class  Charmander extends Pokemon{	
 	public Charmander() {

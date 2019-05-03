@@ -1,4 +1,4 @@
-package br.usp.ime.mac0321.PokemonGO;
+package game;
 
 abstract public class Pokemon {
 	protected int hp=100;

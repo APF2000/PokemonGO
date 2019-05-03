@@ -1,4 +1,4 @@
-package br.usp.ime.mac0321.PokemonGO;
+package game;
 
 public class PokemonController extends Controller{
 

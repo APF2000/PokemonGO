@@ -1,10 +1,9 @@
-package br.usp.ime.mac0321.PokemonGO;
+package pokemons;
 
-public class Rattata extends Pokemon {
-
+public class Raticate extends Pokemon {
 	
-	public Rattata() {
-		nome = "Rattata";
+	public Raticate() {
+		nome = "Raticate";
 		Move[] ataques= {new Move("teste0",10),new Move("teste1",10), new Move("teste2",10),new Move("teste3",10)};
 		tipo = "Normal";
 	}
