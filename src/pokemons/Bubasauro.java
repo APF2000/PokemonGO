@@ -1,4 +1,7 @@
 package pokemons;
+import game.Pokemon;
+import game.Move;
+
 
 public class Bubasauro extends Pokemon{
 	public Bubasauro() {

@@ -1,5 +1,18 @@
 package game;
 
+import pokemons.Bubasauro;
+import pokemons.Caterpie;
+import pokemons.Charmander;
+import pokemons.Cubone;
+import pokemons.Ekans;
+import pokemons.Gardevoir;
+import pokemons.Gyarados;
+import pokemons.Pidgeot;
+import pokemons.Pikachu;
+import pokemons.Rattata;
+import pokemons.Raychu;
+import pokemons.Spearow;
+
 public class PokemonController extends Controller{
 
 	public PokemonController() {

@@ -1,6 +1,9 @@
 package pokemons;
+import game.Pokemon;
+import game.Move;
 
 public class Pikachu extends Pokemon{
+	Move[] ataques = new Move[4];
 	public Pikachu () {
 		nome = "Pikachu";
 		ataques[0]=new Move("teste1",10);

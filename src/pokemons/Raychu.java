@@ -1,4 +1,6 @@
 package pokemons;
+import game.Pokemon;
+import game.Move;
 
 public class Raychu extends Pokemon {
 	
