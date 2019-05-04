@@ -1,5 +1,18 @@
 package br.usp.ime.mac0321.PokemonGO;
 
+import br.usp.ime.mac0321.Pokemons.Bubasauro;
+import br.usp.ime.mac0321.Pokemons.Caterpie;
+import br.usp.ime.mac0321.Pokemons.Charmander;
+import br.usp.ime.mac0321.Pokemons.Cubone;
+import br.usp.ime.mac0321.Pokemons.Ekans;
+import br.usp.ime.mac0321.Pokemons.Gardevoir;
+import br.usp.ime.mac0321.Pokemons.Gyarados;
+import br.usp.ime.mac0321.Pokemons.Pidgeot;
+import br.usp.ime.mac0321.Pokemons.Pikachu;
+import br.usp.ime.mac0321.Pokemons.Rattata;
+import br.usp.ime.mac0321.Pokemons.Raychu;
+import br.usp.ime.mac0321.Pokemons.Spearow;
+
 public class PokemonController extends Controller{
 
 	public PokemonController() {
@@ -28,20 +41,52 @@ public class PokemonController extends Controller{
 	private class Acao extends Event{
 		Treinador a;
 		Treinador b;
-		String move= "error 434:strign nÃ£o recebida";
+		String move= "";
 		int selecao1=0;
 		int selecao2=0;
+		int selecao3=0;
+		int selecao4=0;
+		boolean alvo1;//true: alvo é o inimigo / false o alvo é ele mesmo 
+		boolean alvo2;
 
-		public Acao(Treinador a, Treinador b, int selecao1,int selecao2) {
+		public Acao(Treinador a, int selecao1, int selecao2, boolean alvo1, Treinador b,  int selecao3, int selecao4, boolean alvo2) {
 			this.a=a;
 			this.b=b;
 			this.selecao1=selecao1;
 			this.selecao2=selecao2;
+			this.selecao3=selecao3;
+			this.selecao4=selecao4;
 		}
 
 		public void action() {
-			if(a.noJogo()) {
-				move=a.movimentoSelect(selecao1,selecao2,b.selPoke());	
+			
+			if(selecao1>selecao3) {
+				if(alvo1==true) {
+					move+=a.movimentoSelect(selecao1,selecao2,b.selPoke());	
+				}
+				else {
+					move+=a.movimentoSelect(selecao1,selecao2,a.selPoke());	
+				}
+				if(alvo2==true) {
+					move+=b.movimentoSelect(selecao3,selecao4,a.selPoke());	
+				}
+				else {
+					move+=b.movimentoSelect(selecao3,selecao4,b.selPoke());	
+				}
+			}
+			else {
+				if(alvo2==true) {
+					move+=b.movimentoSelect(selecao3,selecao4,a.selPoke());	
+				}
+				else {
+					move+=b.movimentoSelect(selecao3,selecao4,b.selPoke());	
+				}
+				if(alvo1==true) {
+					move+=a.movimentoSelect(selecao1,selecao2,b.selPoke());	
+				}
+				else {
+					move+=a.movimentoSelect(selecao1,selecao2,a.selPoke());	
+				}
 			}
 		}
 
@@ -86,9 +131,8 @@ public class PokemonController extends Controller{
 			System.out.println("\nCOMECOU A BATALHA\n");
 			addEvent(new Select(esponja,0));
 			addEvent(new Select(construtor,0));
-			addEvent(new Acao(esponja,construtor,0, 1));
-			addEvent(new Acao(esponja,construtor,3, 1));
-			addEvent(new Acao(esponja,construtor,0, 1));
+			addEvent(new Acao(esponja,0, 0,true,construtor,2,1,false));
+
 			
 
 		}

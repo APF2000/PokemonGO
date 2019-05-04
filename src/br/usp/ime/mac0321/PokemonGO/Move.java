@@ -9,7 +9,7 @@ public class Move {
 		this.dano=dano;
 	}
 	public int damage() {
-		System.out.println(dano);
+		//System.out.println(dano);
 		return(dano);
 	}
 	public String name() {

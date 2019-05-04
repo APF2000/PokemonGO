@@ -3,7 +3,7 @@ package br.usp.ime.mac0321.PokemonGO;
 public class Treinador {
 	private String nome;
 	private Pokemon[] pokedex= new Pokemon[6];
-	private int selecao = 0;
+	private int selecao=0;
 	private int indice_de_pokes = 0;
 	private Move[] inventario = new Move[5];
 	private int inventIndex = 0;
@@ -27,7 +27,8 @@ public class Treinador {
 
 		for(int i=0; i<6; i++) {
 			if(pokedex[i].getHP()>0){
-				selecao=i;
+				if(pokedex[selecao].getHP()<0)
+					selecao=i;
 				return(i);
 			}
 		}
@@ -44,11 +45,11 @@ public class Treinador {
 	
 	public String movimentoPoke (int num_mov,Pokemon alvo) {
 		String saida;
-		//System.out.println("teste: " + alvo.getNome());
+		//System.out.println("teste: " + selecao);
 		saida = pokedex[selecao].action(num_mov, alvo);
 		return("(" + nome + ") usou " + 
 				pokedex[selecao].getNome() + " para atacar o adversario com "
-				+ saida);
+				+ saida+"\n");
 	}
 	
 	public void addPoke (Pokemon poke) {
@@ -74,13 +75,16 @@ public class Treinador {
 	
 	public String usarItem(int num_item,Pokemon alvo) {
 		alvo.attackDamage(inventario[num_item].damage());
+		while(num_item != 4 && inventario[num_item+1]!=null) {
+			inventario[num_item]=inventario[num_item+1];
+		}
 		return("(" + nome + ") usou "
 				+ inventario[num_item].name())+ " em " + alvo.getNome();
 	}
 	public String movimentoSelect(int sel1, int sel2,Pokemon alvo) {
 		// sel1 diz que tipo de acao sera tomada(ataque, usar item, fugir ou trocar pokemon
 		// sel2 especifica a acao de sel1 (ex: sel1 = ataque, sel2 = choque do trovao
-		String saida="Error 404";
+		String saida="Error 404-classe: treinador";
 		if(sel1 == 0) {
 			// Ataque
 			saida=movimentoPoke (sel2,alvo);
@@ -90,17 +94,16 @@ public class Treinador {
 			saida=usarItem(sel2, alvo);
 		}
 		else if(sel1==2) {
-			// Fugir
-			nojogo=false;
-			saida=(nome +" fugiu da batalha");
+			// Trocar pokemon
+			selecao=sel2;
+			saida=("("+nome +") trocou o seu pokemon para " + pokedex[selecao].getNome()+"\n");
 		}
 		else if(sel1==3) {
-			// Trocar pokemon
-			System.out.println("trocou" + sel2);
-			selecao=sel2;
-			System.out.println("trocou " + selecao);
-			saida=(nome +" trocou o seu pokemon para " + pokedex[selecao].getNome());
+			// Fugir
+			nojogo=false;
+			saida=(nome +" fugiu da batalha"+"\n");
 		}
+		
 		return(saida);
 	}
 }

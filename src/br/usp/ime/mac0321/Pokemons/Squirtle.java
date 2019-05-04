@@ -1,4 +1,7 @@
-package br.usp.ime.mac0321.PokemonGO;
+package br.usp.ime.mac0321.Pokemons;
+
+import br.usp.ime.mac0321.PokemonGO.Move;
+import br.usp.ime.mac0321.PokemonGO.Pokemon;
 
 public class Squirtle extends Pokemon {
 	
