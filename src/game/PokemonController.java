@@ -1,4 +1,17 @@
-package br.usp.ime.mac0321.PokemonGO;
+package game;
+
+import pokemons.Bubasauro;
+import pokemons.Caterpie;
+import pokemons.Charmander;
+import pokemons.Cubone;
+import pokemons.Ekans;
+import pokemons.Gardevoir;
+import pokemons.Gyarados;
+import pokemons.Pidgeot;
+import pokemons.Pikachu;
+import pokemons.Rattata;
+import pokemons.Raychu;
+import pokemons.Spearow;
 
 import br.usp.ime.mac0321.Pokemons.Bubasauro;
 import br.usp.ime.mac0321.Pokemons.Caterpie;

@@ -1,4 +1,4 @@
-package br.usp.ime.mac0321.PokemonGO;
+package game;
 
 // This is just a way to hold Event objects.
 
