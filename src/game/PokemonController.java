@@ -13,18 +13,6 @@ import pokemons.Rattata;
 import pokemons.Raychu;
 import pokemons.Spearow;
 
-import br.usp.ime.mac0321.Pokemons.Bubasauro;
-import br.usp.ime.mac0321.Pokemons.Caterpie;
-import br.usp.ime.mac0321.Pokemons.Charmander;
-import br.usp.ime.mac0321.Pokemons.Cubone;
-import br.usp.ime.mac0321.Pokemons.Ekans;
-import br.usp.ime.mac0321.Pokemons.Gardevoir;
-import br.usp.ime.mac0321.Pokemons.Gyarados;
-import br.usp.ime.mac0321.Pokemons.Pidgeot;
-import br.usp.ime.mac0321.Pokemons.Pikachu;
-import br.usp.ime.mac0321.Pokemons.Rattata;
-import br.usp.ime.mac0321.Pokemons.Raychu;
-import br.usp.ime.mac0321.Pokemons.Spearow;
 
 public class PokemonController extends Controller{
 
