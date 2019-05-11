@@ -12,7 +12,7 @@ import pokemons.Pikachu;
 import pokemons.Rattata;
 import pokemons.Raychu;
 import pokemons.Spearow;
-
+import java.util.Scanner;
 
 public class PokemonController extends Controller{
 
@@ -29,7 +29,7 @@ public class PokemonController extends Controller{
 			this.selecao=selecao;
 		}
 
-		public void action() {
+		public void prioridade() {
 			saida=a.selectPoke(selecao);
 
 		}
@@ -43,50 +43,43 @@ public class PokemonController extends Controller{
 		Treinador a;
 		Treinador b;
 		String move= "";
-		int selecao1=0;
-		int selecao2=0;
-		int selecao3=0;
-		int selecao4=0;
-		boolean alvo1;//true: alvo é o inimigo / false o alvo é ele mesmo 
-		boolean alvo2;
+		int acao_t1=0;
+		int sel_t1=0;
+		int acao_t2=0;
+		int sel_t2=0;
+		boolean alvo;//true: alvo é o inimigo / false: o alvo é ele mesmo 
 
-		public Acao(Treinador a, int selecao1, int selecao2, boolean alvo1, Treinador b,  int selecao3, int selecao4, boolean alvo2) {
+		public Acao(Treinador a, int acao_t1, int sel_t1, 
+				Treinador b,  int acao_t2, int sel_t2, boolean alvo) {
 			this.a=a;
 			this.b=b;
-			this.selecao1=selecao1;
-			this.selecao2=selecao2;
-			this.selecao3=selecao3;
-			this.selecao4=selecao4;
+			this.acao_t1=acao_t1;
+			this.sel_t1=sel_t1;
+			this.acao_t2=acao_t2;
+			this.sel_t2=sel_t2;
 		}
 
-		public void action() {
+		public void prioridade() {
 			
-			if(selecao1>selecao3) {
-				if(alvo1==true) {
-					move+=a.movimentoSelect(selecao1,selecao2,b.selPoke());	
+			if(acao_t1>acao_t2) {
+				if(alvo==true) {
+					move += a.movimentoSelect(acao_t1,sel_t1,b.selPoke());	
+					move += b.movimentoSelect(acao_t2,sel_t2,a.selPoke());
 				}
 				else {
-					move+=a.movimentoSelect(selecao1,selecao2,a.selPoke());	
+					move += a.movimentoSelect(acao_t1,sel_t1,a.selPoke());	
+					move += b.movimentoSelect(acao_t2,sel_t2,b.selPoke());	
 				}
-				if(alvo2==true) {
-					move+=b.movimentoSelect(selecao3,selecao4,a.selPoke());	
-				}
-				else {
-					move+=b.movimentoSelect(selecao3,selecao4,b.selPoke());	
-				}
+
 			}
 			else {
-				if(alvo2==true) {
-					move+=b.movimentoSelect(selecao3,selecao4,a.selPoke());	
+				if(alvo==true) {
+					move += b.movimentoSelect(acao_t2,sel_t2,a.selPoke());
+					move += a.movimentoSelect(acao_t1,sel_t1,b.selPoke());	
 				}
 				else {
-					move+=b.movimentoSelect(selecao3,selecao4,b.selPoke());	
-				}
-				if(alvo1==true) {
-					move+=a.movimentoSelect(selecao1,selecao2,b.selPoke());	
-				}
-				else {
-					move+=a.movimentoSelect(selecao1,selecao2,a.selPoke());	
+					move += b.movimentoSelect(acao_t2,sel_t2,b.selPoke());
+					move += a.movimentoSelect(acao_t1,sel_t1,a.selPoke());		
 				}
 			}
 		}
@@ -112,10 +105,25 @@ public class PokemonController extends Controller{
 		private Treinador construtor = new Treinador("Bob, o construtor");
 
 
-		public void action() {
+		public void prioridade() {
 			long tm = System.currentTimeMillis();
-
-			esponja.addPoke(new Pikachu());
+			Scanner scanf = new Scanner(System.in);
+			String poke;
+			
+			
+			// Esqueleto do jogo de verdade
+			System.out.println("Adicione 2 Pokemons");
+			for(int i = 0; i < 2; i++) {
+				poke = scanf.nextLine();
+				esponja.addPoke(poke);
+			}
+			
+			System.out.println("Adicione 2 Pokemons vc tbm");
+			for(int i = 0; i < 2; i++) {
+				poke = scanf.nextLine();
+				construtor.addPoke(poke);
+			}
+			/*esponja.addPoke(new Pikachu());
 			esponja.addPoke(new Gyarados());
 			esponja.addPoke(new Gardevoir());
 			esponja.addPoke(new Caterpie());
@@ -127,14 +135,13 @@ public class PokemonController extends Controller{
 			construtor.addPoke(new Rattata());
 			construtor.addPoke(new Raychu());
 			construtor.addPoke(new Cubone());
-			construtor.addPoke(new Ekans());
+			construtor.addPoke(new Ekans()); */
 
 			System.out.println("\nCOMECOU A BATALHA\n");
 			addEvent(new Select(esponja,0));
 			addEvent(new Select(construtor,0));
-			addEvent(new Acao(esponja,0, 0,true,construtor,2,1,false));
-
-			
+			addEvent(new Acao(esponja,0, 0,construtor,2,1,true));
+			addEvent(new Acao(esponja,2, 1,construtor,0,0,false));		
 
 		}
 

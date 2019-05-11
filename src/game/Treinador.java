@@ -1,4 +1,16 @@
 package game;
+import pokemons.Bubasauro;
+import pokemons.Caterpie;
+import pokemons.Charmander;
+import pokemons.Cubone;
+import pokemons.Ekans;
+import pokemons.Gardevoir;
+import pokemons.Gyarados;
+import pokemons.Pidgeot;
+import pokemons.Pikachu;
+import pokemons.Rattata;
+import pokemons.Raychu;
+import pokemons.Spearow;
 
 public class Treinador {
 	private String nome;
@@ -8,13 +20,13 @@ public class Treinador {
 	private Move[] inventario = new Move[5];
 	private int inventIndex = 0;
 	private boolean nojogo=true;
-	
-	
-	
+
+
+
 	public Treinador(String nome) {
 		this.nome=nome;
 	}
-	
+
 	public boolean noJogo() {
 		if(proxComHp()!=-1) {
 			return(nojogo);
@@ -37,12 +49,12 @@ public class Treinador {
 	public String getNome() {
 		return(nome);
 	}
-	
+
 	public String selectPoke (int selecao) {
 		this.selecao=selecao;
 		return(pokedex[selecao].getNome());
 	}
-	
+
 	public String movimentoPoke (int num_mov,Pokemon alvo) {
 		String saida;
 		//System.out.println("teste: " + selecao);
@@ -51,13 +63,28 @@ public class Treinador {
 				pokedex[selecao].getNome() + " para atacar o adversario com "
 				+ saida+"\n");
 	}
-	
+
 	public void addPoke (Pokemon poke) {
 		pokedex[indice_de_pokes]= poke;
 		indice_de_pokes++;
 		System.out.println("(" + nome + ") adicionou " + 
-				poke.getNome()+" na sua pokedex");
+				pokedex[indice_de_pokes - 1].getNome()+" na sua pokedex");
 	}	
+	public void addPoke (String poke) {
+
+		if(poke.equalsIgnoreCase("Pikachu")) {
+
+			addPoke(new Pikachu() );
+		}
+		else if(poke.equalsIgnoreCase("Charmander")) {
+
+			addPoke(new Charmander() );
+		}
+		else {
+			System.out.println("Erro : Isso nao deveria ter acontecido");
+		}
+	}
+
 	public Pokemon selPoke () {
 		return(pokedex[selecao]);
 	}
@@ -72,7 +99,7 @@ public class Treinador {
 					+ item.name());
 		}
 	}
-	
+
 	public String usarItem(int num_item,Pokemon alvo) {
 		alvo.attackDamage(inventario[num_item].damage());
 		while(num_item != 4 && inventario[num_item+1]!=null) {
@@ -103,7 +130,7 @@ public class Treinador {
 			nojogo=false;
 			saida=(nome +" fugiu da batalha"+"\n");
 		}
-		
+
 		return(saida);
 	}
 }

@@ -17,8 +17,10 @@ class EventSet {
 		int start = next;
 		do {
 			next = (next + 1) % events.length;
+			
 			// See if it has looped to the beginning:
 			if(start == next) looped = true;
+			
 			// If it loops past start, the list
 			// is empty:
 			if((next == (start + 1) % events.length)

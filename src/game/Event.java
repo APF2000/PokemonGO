@@ -19,7 +19,7 @@ public class Event {
 		return System.currentTimeMillis() >= evtTime;
 	}
 	
-	public void action() {}
+	protected void prioridade() {}
 	public String description() {
 		return "description";
 	}

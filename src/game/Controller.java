@@ -15,7 +15,7 @@ public class Controller {
 		Event e = new Event();
 		while((e = es.getNext()) != null) {
 			if(e.ready()) {
-				e.action();
+				e.prioridade();
 				System.out.println(e.description());
 				es.removeCurrent();
 			}
