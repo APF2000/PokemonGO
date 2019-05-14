@@ -21,7 +21,7 @@ public class PokemonController extends Controller{
 	}
 	private class Select extends Event{
 		private String saida;
-		Treinador a = new Treinador("Esponja");
+		Treinador a = new Treinador("Esponja", true);
 		int selecao;
 
 		public Select(Treinador a, int selecao) {

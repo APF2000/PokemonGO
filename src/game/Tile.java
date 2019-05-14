@@ -11,6 +11,8 @@ public class Tile {
 	private final int baixo = 4;
 
 	private boolean tipo;
+	private int linha_atual;
+	private int coluna_atual;
 
 	public Tile() {
 		Random rand = new Random();
@@ -28,6 +30,18 @@ public class Tile {
 
 	public Tile[][] criaMapa(int linhas, int colunas) {
 		Tile[][] mapa = new Tile[linhas][colunas]; 
+		for(int i = 0; i < linhas; i++) {
+			for(int j = 0; j < colunas; j++) {
+				mapa[i][j] = new Tile();
+			}
+		}
+		
+		Random rand = new Random();
+		linha_atual = rand.nextInt(linhas);
+		coluna_atual = rand.nextInt(colunas);
+		
 		return mapa;
 	}
+
+	
 }
