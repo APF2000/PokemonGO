@@ -103,8 +103,8 @@ public class PokemonController extends Controller{
 			return "";
 		}
 
-		private Treinador esponja = new Treinador("Bob esponja");
-		private Treinador construtor = new Treinador("Bob, o construtor");
+		private Treinador esponja = new Treinador("Bob esponja", true);
+		private Treinador construtor = new Treinador("Bob, o construtor", true);
 
 
 		public void prioridade() {

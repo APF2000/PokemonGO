@@ -19,10 +19,10 @@ import pokemons.Spearow;
 import pokemons.Squirtle;
 import pokemons.Weedle;
 
-public class Treinador extends Pokemon{
+public class Treinador{
 	// Treinadores podem ser Pokemons sozinhos
 	private String nome;
-	private Pokemon[] pokedex= new Pokemon[6];
+	private Pokemon[] pokedex;
 	private int selecao=0;
 	private int indice_de_pokes = 0;
 	private Move[] inventario = new Move[5];
@@ -31,8 +31,17 @@ public class Treinador extends Pokemon{
 
 
 
-	public Treinador(String nome) {
+	public Treinador(String nome, boolean jogador) {
 		this.nome=nome;
+		
+		// Jogador será true se o treinador treinado for 
+		// a pessoa que controla o jogo.
+		if(jogador == true) {
+			pokedex = new Pokemon[6];
+		}
+		else {
+			pokedex = new Pokemon[1];
+		}
 	}
 
 	public boolean noJogo() {
