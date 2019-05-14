@@ -30,7 +30,7 @@ public class PokemonController extends Controller{
 		}
 
 		public void prioridade() {
-			saida=a.selectPoke(selecao);
+			saida = a.selectedPoke().getNome();
 
 		}
 
@@ -53,8 +53,10 @@ public class PokemonController extends Controller{
 				Treinador b,  int acao_t2, int sel_t2, boolean alvo) {
 			this.a=a;
 			this.b=b;
+			
 			this.acao_t1=acao_t1;
 			this.sel_t1=sel_t1;
+			
 			this.acao_t2=acao_t2;
 			this.sel_t2=sel_t2;
 		}
@@ -63,23 +65,23 @@ public class PokemonController extends Controller{
 			
 			if(acao_t1>acao_t2) {
 				if(alvo==true) {
-					move += a.movimentoSelect(acao_t1,sel_t1,b.selPoke());	
-					move += b.movimentoSelect(acao_t2,sel_t2,a.selPoke());
+					move += a.movimentoSelect(acao_t1,sel_t1,b.selectedPoke());	
+					move += b.movimentoSelect(acao_t2,sel_t2,a.selectedPoke());
 				}
 				else {
-					move += a.movimentoSelect(acao_t1,sel_t1,a.selPoke());	
-					move += b.movimentoSelect(acao_t2,sel_t2,b.selPoke());	
+					move += a.movimentoSelect(acao_t1,sel_t1,a.selectedPoke());	
+					move += b.movimentoSelect(acao_t2,sel_t2,b.selectedPoke());	
 				}
 
 			}
 			else {
 				if(alvo==true) {
-					move += b.movimentoSelect(acao_t2,sel_t2,a.selPoke());
-					move += a.movimentoSelect(acao_t1,sel_t1,b.selPoke());	
+					move += b.movimentoSelect(acao_t2,sel_t2,a.selectedPoke());
+					move += a.movimentoSelect(acao_t1,sel_t1,b.selectedPoke());	
 				}
 				else {
-					move += b.movimentoSelect(acao_t2,sel_t2,b.selPoke());
-					move += a.movimentoSelect(acao_t1,sel_t1,a.selPoke());		
+					move += b.movimentoSelect(acao_t2,sel_t2,b.selectedPoke());
+					move += a.movimentoSelect(acao_t1,sel_t1,a.selectedPoke());		
 				}
 			}
 		}
