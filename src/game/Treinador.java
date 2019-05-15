@@ -5,21 +5,14 @@ import pokemons.Charmander;
 import pokemons.Cubone;
 import pokemons.Ekans;
 import pokemons.Gardevoir;
-import pokemons.Geodude;
 import pokemons.Gyarados;
 import pokemons.Pidgeot;
-import pokemons.Pidgey;
 import pokemons.Pikachu;
-import pokemons.Poliwrath;
-import pokemons.Raticate;
 import pokemons.Rattata;
 import pokemons.Raychu;
-import pokemons.Sandshrew;
 import pokemons.Spearow;
-import pokemons.Squirtle;
-import pokemons.Weedle;
 
-public class Treinador{
+public class Treinador {
 	// Treinadores podem ser Pokemons sozinhos
 	private String nome;
 	private Pokemon[] pokedex;
@@ -29,18 +22,25 @@ public class Treinador{
 	private int inventIndex = 0;
 	private boolean nojogo=true;
 
+	private final int atacar = 0, item = 1, trocar = 2, fugir = 3;
 
 
 	public Treinador(String nome, boolean jogador) {
 		this.nome=nome;
-		
+
 		// Jogador será true se o treinador treinado for 
 		// a pessoa que controla o jogo.
 		if(jogador == true) {
 			pokedex = new Pokemon[6];
+			for(int i = 0; i < 5; i++) {
+				inventario[i] = new Move("Pokebola com espinhos", 100);
+			}
 		}
 		else {
 			pokedex = new Pokemon[1];
+			for(int i = 0; i < 5; i++) {
+				inventario[i] = new Move("Casca de banana", 10);
+			}
 		}
 	}
 
@@ -52,11 +52,11 @@ public class Treinador{
 			return(false);
 		}
 	}
-	private int proxComHp() {
+	public int proxComHp() {
 
 		for(int i=0; i<6; i++) {
-			if(pokedex[i].getHP()>0){
-				if(pokedex[selecao].getHP()<0)
+			if(pokedex[i].getHp()>0){
+				if(pokedex[selecao].getHp()<0)
 					selecao=i;
 				return(i);
 			}
@@ -66,7 +66,7 @@ public class Treinador{
 	public String getNome() {
 		return(nome);
 	}
-	
+
 	public Pokemon selectedPoke () {
 		return(pokedex[selecao]);
 	}
@@ -82,30 +82,23 @@ public class Treinador{
 		return;
 	}
 	public Pokemon whichPoke(String poke) {
-		Pokemon[] list = new Pokemon[19];
+		Pokemon[] list = new Pokemon[12];
 
-		list[0] = new Weedle();
+		list[0] = new Spearow();
 		list[1] = new Bubasauro();
 		list[2] = new Caterpie();
 		list[3] = new Charmander();
 		list[4] = new Cubone();
 		list[5] = new Ekans();
 		list[6] = new Gardevoir();
-		list[7] = new Geodude();
-		list[8] = new Gyarados();
-		list[9] = new Pidgeot();
-		list[10] = new Pidgey();
-		list[11] = new Pikachu();
-		list[12] = new Poliwrath();
-		list[13] = new Raticate();
-		list[14] = new Rattata();
-		list[15] = new Raychu();
-		list[16] = new Sandshrew();
-		list[17] = new Spearow();
-		list[18] = new Squirtle();
+		list[7] = new Gyarados();
+		list[8] = new Pidgeot();
+		list[9] = new Pikachu();
+		list[10] = new Rattata();
+		list[11] = new Raychu();
 
 
-		for(int i = 0; i < 19; i++) {
+		for(int i = 0; i < 12; i++) {
 			if(list[i].getNome().equalsIgnoreCase(poke)) {
 				return list[i];
 			}
@@ -120,7 +113,7 @@ public class Treinador{
 		}
 		else {
 			System.out.println("Erro: invetario cheio. Nao foi possivel adicionar "
-					+ item.name());
+					+ item.getNome());
 		}
 	}
 
@@ -130,39 +123,8 @@ public class Treinador{
 			inventario[num_item]=inventario[num_item+1];
 		}
 		return("(" + nome + ") usou "
-				+ inventario[num_item].name())+ " em " + alvo.getNome();
+				+ inventario[num_item].getNome())+ " em " + alvo.getNome();
 	}
-	public String movimentoSelect(int sel1, int sel2, Pokemon alvo) {
-		
-		// sel1 diz que tipo de acao sera tomada(ataque, usar item, fugir ou trocar pokemon
-		// sel2 especifica a acao de sel1 (ex: sel1 = ataque, sel2 = choque do trovao)
-		String saida="Error 404-classe: treinador";
-		
-		// Ataque
-		if(sel1 == 0) {
-			saida=movimentoPoke (sel2,alvo);
-		}
-		
-		// Item
-		else if(sel1==1) {
-			saida=usarItem(sel2, alvo);
-		}
-		
-		// Trocar pokemon
-		else if(sel1==2) {
-			selecao=sel2;
-			saida=("("+nome +") trocou o seu pokemon para " + pokedex[selecao].getNome()+"\n");
-		}
-		
-		// Fugir
-		else if(sel1==3) {
-			nojogo=false;
-			saida=(nome +" fugiu da batalha"+"\n");
-		}
-
-		return(saida);
-	}
-	
 
 
 	public String movimentoPoke (int num_mov,Pokemon alvo) {
@@ -172,5 +134,36 @@ public class Treinador{
 		return("(" + nome + ") usou " + 
 				pokedex[selecao].getNome() + " para atacar o adversario com "
 				+ saida+"\n");
+	}
+	
+	public String movimentoSelect(int sel1, int sel2, Pokemon alvo) {
+
+		// sel1 diz que tipo de acao sera tomada(ataque, usar item, fugir ou trocar pokemon
+		// sel2 especifica a acao de sel1 (ex: sel1 = ataque, sel2 = choque do trovao)
+		String saida="Error 404-classe: treinador";
+
+		// Ataque
+		if(sel1 == atacar) {
+			saida = movimentoPoke (sel2,alvo);
+		}
+
+		// Item
+		else if(sel1 == item) {
+			saida = usarItem(sel2, alvo);
+		}
+
+		// Trocar pokemon
+		else if(sel1 == trocar) {
+			selecao = sel2;
+			saida = ("("+nome +") trocou o seu pokemon para " + pokedex[selecao].getNome()+"\n");
+		}
+
+		// Fugir
+		else if(sel1 == fugir) {
+			nojogo = false;
+			saida = (nome +" fugiu da batalha"+"\n");
+		}
+
+		return(saida);
 	}
 }

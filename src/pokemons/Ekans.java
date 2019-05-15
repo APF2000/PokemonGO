@@ -9,7 +9,7 @@ public class Ekans extends Pokemon {
 		nome = "Ekans";
 		ataques[0]=new Move("Veneno",70);
 		ataques[1]=new Move("Mordida",20);
-		ataques[2]=new Move("Esmargar",30);
+		ataques[2]=new Move("Esmagar",30);
 		ataques[3]=new Move("Sufocar",10);
 		tipo = "Poison";
 	}

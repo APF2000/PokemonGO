@@ -13,34 +13,44 @@ import pokemons.Rattata;
 import pokemons.Raychu;
 import pokemons.Spearow;
 import java.util.Scanner;
+import java.util.Random;
 
 public class PokemonController extends Controller{
 	public static final boolean comum = false;
 	public static final boolean gramado = true;
 
-	public static final int direita = 1, cima = 2;
-	public static final int esquerda = -1, baixo = -2;
-	
+	public static final String direita = "D", cima = "C";
+	public static final String esquerda = "E", baixo = "B";
+
+	private final int atacar = 0, item = 1, trocar = 2, fugir = 3;
+
 	public PokemonController() {
 		super();
 	}
+
+	public void addEvent() {
+		System.out.println("Evento adicionado");
+	}
+
+
 	private class Select extends Event{
 		private String saida;
-		Treinador a = new Treinador("Esponja", true);
+		Treinador esponja = new Treinador("Esponja", true);
+
 		int selecao;
 
 		public Select(Treinador a, int selecao) {
-			this.a=a;
+			esponja = a;
 			this.selecao=selecao;
 		}
 
 		public void prioridade() {
-			saida = a.selectedPoke().getNome();
+			saida = esponja.selectedPoke().getNome();
 
 		}
 
 		public String description() {
-			return ("(" + a.getNome() +") selecionou "+ saida);
+			return ("(" + esponja.getNome() +") selecionou "+ saida);
 		}
 
 	}
@@ -58,16 +68,16 @@ public class PokemonController extends Controller{
 				Treinador b,  int acao_t2, int sel_t2, boolean alvo) {
 			this.a=a;
 			this.b=b;
-			
+
 			this.acao_t1=acao_t1;
 			this.sel_t1=sel_t1;
-			
+
 			this.acao_t2=acao_t2;
 			this.sel_t2=sel_t2;
 		}
 
 		public void prioridade() {
-			
+
 			if(acao_t1>acao_t2) {
 				if(alvo==true) {
 					move += a.movimentoSelect(acao_t1,sel_t1,b.selectedPoke());	
@@ -104,35 +114,33 @@ public class PokemonController extends Controller{
 
 	private class Restart extends Event {
 
+		public Restart() {}
 		public String description() {
 			return "";
 		}
 
-		private Treinador esponja = new Treinador("Bob esponja", true);
-		private Treinador construtor = new Treinador("Bob, o construtor", true);
+		private Treinador jogador = new Treinador("Você", true);
+		private Treinador selvagem = new Treinador("Pokemon Selvagem", false);
 
 
 		public void prioridade() {
 			long tm = System.currentTimeMillis();
+
 			Scanner scanf = new Scanner(System.in);
 			String poke;
-			
-			
+
+
 			// Esqueleto do jogo de verdade
-<<<<<<< HEAD
 			/*
 			System.out.println("Adicione 2 Pokemons");
 			for(int i = 0; i < 2; i++) {
-=======
 			int n = 3;
 			System.out.println("Adicione " + n + " Pokemons à pokedex");
 			for(int i = 0; i < n; i++) {
->>>>>>> 526e24e6068f66f3e3ee1e6e9122ace79053a800
 				poke = scanf.nextLine();
-				esponja.addPoke(poke);
+				jogador.addPoke(poke);
 			}
-			
-<<<<<<< HEAD
+
 			System.out.println("Adicione 2 Pokemons vc tbm");
 			for(int i = 0; i < 2; i++) {
 				poke = scanf.nextLine();
@@ -141,7 +149,7 @@ public class PokemonController extends Controller{
 			}
 			*/
 			esponja.addPoke(new Pikachu());
-=======
+
 			/*esponja.addPoke(new Pikachu());
 >>>>>>> 526e24e6068f66f3e3ee1e6e9122ace79053a800
 			esponja.addPoke(new Gyarados());
@@ -158,45 +166,93 @@ public class PokemonController extends Controller{
 			construtor.addPoke(new Ekans());
 
 			System.out.println("\nCOMECOU A BATALHA\n");
+=======
+
+			selvagem.addPoke("Gardevoir");
+
+			/*System.out.println("\nCOMECOU A BATALHA\n");
 			addEvent(new Select(esponja,0));
 			addEvent(new Select(construtor,0));
 			addEvent(new Acao(esponja,0, 0,construtor,2,1,true));
 			addEvent(new Acao(esponja,2, 1,construtor,0,0,false)); */	
-			
+
 			Tile[][] mapa;
-			mapa = Tile.criaMapa(30, 30);
-			for(int i = 0; i < 5; i++) {
-				for(int j = 0; j < 10; j++) {
-					Tile.anda(direita, 30, 30);
-					System.out.print("Onde há ");
-					
-					if(mapa[i][j].tipo() == gramado) {
-						System.out.println("grama");
-					}
-					else if(mapa[i][j].tipo() == comum) {
-						System.out.println("chão");
+			Tile aux = new Tile();
+			String direcao;
+
+			int linhas = 20;
+			int colunas = 20;
+
+			mapa = aux.criaMapa(linhas, colunas);
+
+			while(System.currentTimeMillis() - tm <= 10E8) {
+				System.out.print("\nPra qual lado você vai? (D = direita, E = esquerda"
+						+ ", C = cima, B = baixo)");					
+				direcao = scanf.next();
+				aux.anda(direcao, linhas, colunas);
+				System.out.print(", onde há ");
+
+				if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == gramado) {
+					System.out.println("grama");
+				}
+
+				Random rand = new Random();
+
+				// random fica com um numero entre 0 e 10
+				// queremos que a probabilidade de surgir
+				// um poquemon selvagem seja de 10%
+				int random = rand.nextInt(11);
+				random = rand.nextInt(11);
+				if(random % 10 != 0) {
+					System.out.println("\nOh não, um pokemon selvagem!!");
+					int acao_jogador = 0;
+					int sel_jogador = 0;
+
+					while( (jogador.proxComHp() != -1 && selvagem.proxComHp() != -1) 
+							&& acao_jogador != fugir) {
+
+						System.out.println("Atacar = 0, Item = 1, TrocarPoke = 2, Fugir = 3, ");
+						acao_jogador = scanf.nextInt();
+
+						if(acao_jogador == atacar) {
+							System.out.println("Ataques disponíveis:");
+							jogador.selectedPoke().listaAtaques();
+							sel_jogador = scanf.nextInt();								
+						}
+						else if(acao_jogador == item) {
+							sel_jogador = scanf.nextInt();								
+						}
+						else if(acao_jogador == trocar) {
+							sel_jogador = scanf.nextInt();								
+						}
+
+						addEvent(new Acao(jogador,acao_jogador, sel_jogador,selvagem,item,0,true));
+
+						System.out.println("EAEMEN ");
 					}
 				}
-				Tile.anda(baixo, 30, 30);
+			}
+
+
+			else if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == comum) {
+				System.out.println("chão");
 			}
 
 		}
-
-		public Restart(long time) {
-			super(time);
-		}
 	}
 
-	public void addEvent() {
-		//System.out.println("Evento adicionado");
+	public Restart(long time) {
+		super(time);
 	}
 
-	public static void main(String[] args) {
+}
 
-		PokemonController poke = new PokemonController();
-		long tm = System.currentTimeMillis();
-		poke.addEvent(poke.new Restart(tm));
-		poke.run();
-	}
+public static void main(String[] args) {
+
+	PokemonController poke = new PokemonController();
+	long tm = System.currentTimeMillis();
+	poke.addEvent(poke.new Restart(tm));
+	poke.run();
+}
 
 }

@@ -16,7 +16,7 @@ public class Event {
 	}
 	
 	public boolean ready() {
-		return System.currentTimeMillis() >= evtTime;
+		return ( System.currentTimeMillis() >= evtTime );
 	}
 	
 	protected void prioridade() {}
