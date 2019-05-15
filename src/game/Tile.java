@@ -6,7 +6,7 @@ public class Tile {
 	public static final boolean gramado = true;
 
 	public static final int direita = 1, cima = 2;
-	public static final int esquerda = -1, baixo = -2;
+	public static final int esquerda = 3, baixo = 4;
 
 	private boolean tipo;
 	private static int atual_lin;
@@ -22,9 +22,9 @@ public class Tile {
 		int random = rand.nextInt(7);
 		random = rand.nextInt(7);
 		tipo = (random % 6 == 0);
-		System.out.println("random % 6 == 0 " + (random%6==0));
+		//System.out.println("random % 6 == " + random % 6 + " " + (random%6==0));
 	}
-	
+
 	public boolean tipo() {
 		return tipo;
 	}
@@ -49,17 +49,26 @@ public class Tile {
 		System.out.println("\nMovido da posicao (" + atual_lin + ", " 
 				+ atual_col + ")");
 
-		if(direcao == direita || direcao == esquerda) {
-			atual_lin += direcao + linhas;
+		if(direcao == direita) {
+			atual_lin += 1 + linhas;
 			atual_lin %= linhas;
 		}
-		else if(direcao == cima || direcao == baixo){
-			atual_col += (direcao / 2) + colunas;
+		else if(direcao == esquerda){
+			atual_col += -1 + colunas;
+			atual_col %= colunas;
+		}
+		else if(direcao == cima){
+			atual_col += + 1 + colunas;
+			atual_col %= colunas;
+		}
+		else if(direcao == baixo){
+			atual_col += - 1 + colunas;
 			atual_col %= colunas;
 		}
 
 		System.out.println("para (" + atual_lin + ", " 
 				+ atual_col + ")");
+
 	}	
 
 	/*public static void main(String[] args) {
@@ -69,7 +78,7 @@ public class Tile {
 			for(int j = 0; j < 30; j++) {
 				Tile.anda(direita, 30, 30);
 				System.out.print("Onde há ");
-				
+
 				if(mapa[i][j].tipo() == gramado) {
 					System.out.println("grama");
 				}
@@ -80,5 +89,5 @@ public class Tile {
 			Tile.anda(baixo, 30, 30);
 		}
 	}
-	*/
+	 */
 }

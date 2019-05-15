@@ -103,8 +103,7 @@ public class Treinador{
 		list[16] = new Sandshrew();
 		list[17] = new Spearow();
 		list[18] = new Squirtle();
-		
-		System.out.println("ate aqui de boa");
+
 
 		for(int i = 0; i < 19; i++) {
 			if(list[i].getNome().equalsIgnoreCase(poke)) {

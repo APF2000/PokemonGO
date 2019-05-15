@@ -15,7 +15,12 @@ import pokemons.Spearow;
 import java.util.Scanner;
 
 public class PokemonController extends Controller{
+	public static final boolean comum = false;
+	public static final boolean gramado = true;
 
+	public static final int direita = 1, cima = 2;
+	public static final int esquerda = -1, baixo = -2;
+	
 	public PokemonController() {
 		super();
 	}
@@ -114,17 +119,13 @@ public class PokemonController extends Controller{
 			
 			
 			// Esqueleto do jogo de verdade
-			System.out.println("Adicione 2 Pokemons");
-			for(int i = 0; i < 2; i++) {
+			int n = 3;
+			System.out.println("Adicione " + n + " Pokemons à pokedex");
+			for(int i = 0; i < n; i++) {
 				poke = scanf.nextLine();
 				esponja.addPoke(poke);
 			}
 			
-			System.out.println("Adicione 2 Pokemons vc tbm");
-			for(int i = 0; i < 2; i++) {
-				poke = scanf.nextLine();
-				construtor.addPoke(poke);
-			}
 			/*esponja.addPoke(new Pikachu());
 			esponja.addPoke(new Gyarados());
 			esponja.addPoke(new Gardevoir());
@@ -137,13 +138,30 @@ public class PokemonController extends Controller{
 			construtor.addPoke(new Rattata());
 			construtor.addPoke(new Raychu());
 			construtor.addPoke(new Cubone());
-			construtor.addPoke(new Ekans()); */
+			construtor.addPoke(new Ekans());
 
 			System.out.println("\nCOMECOU A BATALHA\n");
 			addEvent(new Select(esponja,0));
 			addEvent(new Select(construtor,0));
 			addEvent(new Acao(esponja,0, 0,construtor,2,1,true));
-			addEvent(new Acao(esponja,2, 1,construtor,0,0,false));		
+			addEvent(new Acao(esponja,2, 1,construtor,0,0,false)); */	
+			
+			Tile[][] mapa;
+			mapa = Tile.criaMapa(30, 30);
+			for(int i = 0; i < 5; i++) {
+				for(int j = 0; j < 10; j++) {
+					Tile.anda(direita, 30, 30);
+					System.out.print("Onde há ");
+					
+					if(mapa[i][j].tipo() == gramado) {
+						System.out.println("grama");
+					}
+					else if(mapa[i][j].tipo() == comum) {
+						System.out.println("chão");
+					}
+				}
+				Tile.anda(baixo, 30, 30);
+			}
 
 		}
 
