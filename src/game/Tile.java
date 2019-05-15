@@ -5,8 +5,8 @@ public class Tile {
 	public final boolean comum = false;
 	public final boolean gramado = true;
 
-	public final int direita = 1, cima = 2;
-	public final int esquerda = 3, baixo = 4;
+	public final String direita = "D", cima = "C";
+	public final String esquerda = "E", baixo = "B";
 
 	private boolean tipo;
 	private static int atual_lin;
@@ -44,31 +44,38 @@ public class Tile {
 		return mapa;
 	}
 
-	public void anda(int direcao, int linhas, int colunas) {
-		System.out.println("\nMovido da posicao (" + atual_lin + ", " 
+	public void anda(String direcao, int linhas, int colunas) {
+		System.out.print("\nMovido da posicao (" + atual_lin + ", " 
 				+ atual_col + ")");
 
-		if(direcao == direita) {
+		if(direcao.equalsIgnoreCase(direita)) {
 			atual_lin += 1 + linhas;
 			atual_lin %= linhas;
 		}
-		else if(direcao == esquerda){
+		else if(direcao.equalsIgnoreCase(esquerda)){
 			atual_col += -1 + colunas;
 			atual_col %= colunas;
 		}
-		else if(direcao == cima){
+		else if(direcao.equalsIgnoreCase(cima)){
 			atual_col += + 1 + colunas;
 			atual_col %= colunas;
 		}
-		else if(direcao == baixo){
+		else if(direcao.equalsIgnoreCase(baixo)){
 			atual_col += - 1 + colunas;
 			atual_col %= colunas;
 		}
 
-		System.out.println("para (" + atual_lin + ", " 
+		System.out.print(" para (" + atual_lin + ", " 
 				+ atual_col + ")");
 
 	}	
+	
+	public int atualLin(){
+		return atual_lin;
+	}
+	public int atualCol(){
+		return atual_col;
+	}
 
 	/*public static void main(String[] args) {
 		Tile[][] mapa;

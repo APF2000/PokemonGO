@@ -18,9 +18,9 @@ public class PokemonController extends Controller{
 	public static final boolean comum = false;
 	public static final boolean gramado = true;
 
-	public static final int direita = 1, cima = 2;
-	public static final int esquerda = -1, baixo = -2;
-	
+	public static final String direita = "D", cima = "C";
+	public static final String esquerda = "E", baixo = "B";
+
 	public PokemonController() {
 		super();
 	}
@@ -58,16 +58,16 @@ public class PokemonController extends Controller{
 				Treinador b,  int acao_t2, int sel_t2, boolean alvo) {
 			this.a=a;
 			this.b=b;
-			
+
 			this.acao_t1=acao_t1;
 			this.sel_t1=sel_t1;
-			
+
 			this.acao_t2=acao_t2;
 			this.sel_t2=sel_t2;
 		}
 
 		public void prioridade() {
-			
+
 			if(acao_t1>acao_t2) {
 				if(alvo==true) {
 					move += a.movimentoSelect(acao_t1,sel_t1,b.selectedPoke());	
@@ -116,8 +116,8 @@ public class PokemonController extends Controller{
 			long tm = System.currentTimeMillis();
 			Scanner scanf = new Scanner(System.in);
 			String poke;
-			
-			
+
+
 			// Esqueleto do jogo de verdade
 			int n = 3;
 			System.out.println("Adicione " + n + " Pokemons à pokedex");
@@ -125,7 +125,7 @@ public class PokemonController extends Controller{
 				poke = scanf.nextLine();
 				esponja.addPoke(poke);
 			}
-			
+
 			/*esponja.addPoke(new Pikachu());
 			esponja.addPoke(new Gyarados());
 			esponja.addPoke(new Gardevoir());
@@ -138,38 +138,44 @@ public class PokemonController extends Controller{
 			construtor.addPoke(new Rattata());
 			construtor.addPoke(new Raychu());
 			construtor.addPoke(new Cubone());
-			construtor.addPoke(new Ekans());
+			construtor.addPoke(new Ekans()); 
 
 			System.out.println("\nCOMECOU A BATALHA\n");
 			addEvent(new Select(esponja,0));
 			addEvent(new Select(construtor,0));
 			addEvent(new Acao(esponja,0, 0,construtor,2,1,true));
 			addEvent(new Acao(esponja,2, 1,construtor,0,0,false)); */	
-			
+
 			Tile[][] mapa;
 			Tile aux = new Tile();
-			
-			mapa = aux.criaMapa(30, 30);
-			for(int i = 0; i < 5; i++) {
-				for(int j = 0; j < 10; j++) {
-					aux.anda(direita, 30, 30);
-					System.out.print("Onde há ");
-					
-					if(mapa[i][j].tipo() == gramado) {
-						System.out.println("grama");
-					}
-					else if(mapa[i][j].tipo() == comum) {
-						System.out.println("chão");
-					}
-				}
-				aux.anda(baixo, 30, 30);
+			String direcao;
+
+			int linhas = 20;
+			int colunas = 20;
+
+			mapa = aux.criaMapa(linhas, colunas);
+			System.out.print("Pra qual lado você vai? (D = direita, E = esquerda"
+					+ ", C = cima, B = baixo)");					
+			direcao = scanf.next();
+			aux.anda(direcao, linhas, colunas);
+			System.out.print(", onde há ");
+
+			if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == gramado) {
+				System.out.println("grama");
 			}
 
+			else if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == comum) {
+				System.out.println("chão");
+			}
+			aux.anda(baixo, 30, 30);
+			
+			Restart res = new Restart(System.currentTimeMillis() + 1000);
 		}
 
 		public Restart(long time) {
 			super(time);
 		}
+
 	}
 
 	public void addEvent() {

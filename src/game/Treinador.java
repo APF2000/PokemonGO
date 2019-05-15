@@ -91,7 +91,7 @@ public class Treinador{
 		list[11] = new Raychu();
 
 
-		for(int i = 0; i < 19; i++) {
+		for(int i = 0; i < 12; i++) {
 			if(list[i].getNome().equalsIgnoreCase(poke)) {
 				return list[i];
 			}
