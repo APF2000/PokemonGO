@@ -5,8 +5,8 @@ public class Tile {
 	public final boolean comum = false;
 	public final boolean gramado = true;
 
-	public final String direita = "D", cima = "C";
-	public final String esquerda = "E", baixo = "B";
+	public static final String direita = "D", cima = "C";
+	public static final String esquerda = "E", baixo = "B";
 
 	private boolean tipo;
 	private static int atual_lin;
@@ -53,8 +53,8 @@ public class Tile {
 			atual_lin %= linhas;
 		}
 		else if(direcao.equalsIgnoreCase(esquerda)){
-			atual_col += -1 + colunas;
-			atual_col %= colunas;
+			atual_lin += -1 + linhas;
+			atual_lin %= linhas;
 		}
 		else if(direcao.equalsIgnoreCase(cima)){
 			atual_col += + 1 + colunas;

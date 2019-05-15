@@ -12,7 +12,7 @@ import pokemons.Rattata;
 import pokemons.Raychu;
 import pokemons.Spearow;
 
-public class Treinador{
+public class Treinador {
 	// Treinadores podem ser Pokemons sozinhos
 	private String nome;
 	private Pokemon[] pokedex;
@@ -22,18 +22,26 @@ public class Treinador{
 	private int inventIndex = 0;
 	private boolean nojogo=true;
 
+	private final int atacar = 0, item = 1, trocar = 2, fugir = 3;
 
 
 	public Treinador(String nome, boolean jogador) {
 		this.nome=nome;
-		
+
 		// Jogador será true se o treinador treinado for 
 		// a pessoa que controla o jogo.
 		if(jogador == true) {
 			pokedex = new Pokemon[6];
+			for(int i = 0; i < 5; i++) {
+				inventario[i] = new Move("Pokebola com espinhos", 100);
+			}
 		}
 		else {
 			pokedex = new Pokemon[1];
+			for(int i = 0; i < 5; i++) {
+				inventario[i] = new Move("Casca de banana", 10);
+			}
+			System.out.println("NASCE UM INIMIGO");
 		}
 	}
 
@@ -59,7 +67,7 @@ public class Treinador{
 	public String getNome() {
 		return(nome);
 	}
-	
+
 	public Pokemon selectedPoke () {
 		return(pokedex[selecao]);
 	}
@@ -118,37 +126,38 @@ public class Treinador{
 		return("(" + nome + ") usou "
 				+ inventario[num_item].name())+ " em " + alvo.getNome();
 	}
+
 	public String movimentoSelect(int sel1, int sel2, Pokemon alvo) {
-		
+
 		// sel1 diz que tipo de acao sera tomada(ataque, usar item, fugir ou trocar pokemon
 		// sel2 especifica a acao de sel1 (ex: sel1 = ataque, sel2 = choque do trovao)
 		String saida="Error 404-classe: treinador";
-		
+
 		// Ataque
-		if(sel1 == 0) {
-			saida=movimentoPoke (sel2,alvo);
+		if(sel1 == atacar) {
+			saida = movimentoPoke (sel2,alvo);
 		}
-		
+
 		// Item
-		else if(sel1==1) {
-			saida=usarItem(sel2, alvo);
+		else if(sel1 == item) {
+			saida = usarItem(sel2, alvo);
 		}
-		
+
 		// Trocar pokemon
-		else if(sel1==2) {
-			selecao=sel2;
-			saida=("("+nome +") trocou o seu pokemon para " + pokedex[selecao].getNome()+"\n");
+		else if(sel1 == trocar) {
+			selecao = sel2;
+			saida = ("("+nome +") trocou o seu pokemon para " + pokedex[selecao].getNome()+"\n");
 		}
-		
+
 		// Fugir
-		else if(sel1==3) {
-			nojogo=false;
-			saida=(nome +" fugiu da batalha"+"\n");
+		else if(sel1 == fugir) {
+			nojogo = false;
+			saida = (nome +" fugiu da batalha"+"\n");
 		}
 
 		return(saida);
 	}
-	
+
 
 
 	public String movimentoPoke (int num_mov,Pokemon alvo) {
