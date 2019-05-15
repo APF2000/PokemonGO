@@ -8,10 +8,10 @@ public class Spearow extends Pokemon {
 	
 	public Spearow() {
 		nome = "Spearow";
-		ataques[0]=new Move("teste1",10);
-		ataques[1]=new Move("teste2",10);
-		ataques[2]=new Move("teste3",10);
-		ataques[3]=new Move("teste4",10);
+		ataques[0]=new Move("Rasante",40);
+		ataques[1]=new Move("Bicadas",20);
+		ataques[2]=new Move("Agarrar e soltar",30);
+		ataques[3]=new Move("penas afiadas",20);
 		tipo = "Flying";
 	}
 }
