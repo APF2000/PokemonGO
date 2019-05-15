@@ -8,6 +8,7 @@ abstract public class Pokemon {
 	
 	
 	public String action(int num_act,Pokemon inimigo) {
+		
 		inimigo.attackDamage(ataques[num_act].damage());		
 		return(ataques[num_act].name());
 	}
