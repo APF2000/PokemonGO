@@ -21,6 +21,8 @@ public class PokemonController extends Controller{
 	public static final String direita = "D", cima = "C";
 	public static final String esquerda = "E", baixo = "B";
 
+	private final int atacar = 0, item = 1, trocar = 2, fugir = 3;
+
 	public PokemonController() {
 		super();
 	}
@@ -28,25 +30,26 @@ public class PokemonController extends Controller{
 	public void addEvent() {
 		System.out.println("Evento adicionado");
 	}
-	
-	
+
+
 	private class Select extends Event{
 		private String saida;
-		Treinador a = new Treinador("Esponja", true);
+		Treinador esponja = new Treinador("Esponja", true);
+
 		int selecao;
 
 		public Select(Treinador a, int selecao) {
-			this.a=a;
+			esponja = a;
 			this.selecao=selecao;
 		}
 
 		public void prioridade() {
-			saida = a.selectedPoke().getNome();
+			saida = esponja.selectedPoke().getNome();
 
 		}
 
 		public String description() {
-			return ("(" + a.getNome() +") selecionou "+ saida);
+			return ("(" + esponja.getNome() +") selecionou "+ saida);
 		}
 
 	}
@@ -110,20 +113,18 @@ public class PokemonController extends Controller{
 
 	private class Restart extends Event {
 
-		public Restart() {
-			System.out.print("COERAPAZIADA");
-		}
+		public Restart() {}
 		public String description() {
 			return "";
 		}
 
 		private Treinador esponja = new Treinador("Bob esponja", true);
-		private Treinador construtor = new Treinador("Bob, o construtor", true);
+		private Treinador selvagem = new Treinador("Pokemon Selvagem", false);
 
 
 		public void prioridade() {
 			long tm = System.currentTimeMillis();
-			
+
 			Scanner scanf = new Scanner(System.in);
 			String poke;
 
@@ -135,6 +136,8 @@ public class PokemonController extends Controller{
 				poke = scanf.nextLine();
 				esponja.addPoke(poke);
 			}
+
+			selvagem.addPoke("Gardevoir");
 
 			/*System.out.println("\nCOMECOU A BATALHA\n");
 			addEvent(new Select(esponja,0));
@@ -150,21 +153,27 @@ public class PokemonController extends Controller{
 			int colunas = 20;
 
 			mapa = aux.criaMapa(linhas, colunas);
-			System.out.print("Pra qual lado você vai? (D = direita, E = esquerda"
-					+ ", C = cima, B = baixo)");					
-			direcao = scanf.next();
-			aux.anda(direcao, linhas, colunas);
-			System.out.print(", onde há ");
 
-			if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == gramado) {
-				System.out.println("grama");
+			while(System.currentTimeMillis() - tm <= 10E8) {
+				System.out.print("Pra qual lado você vai? (D = direita, E = esquerda"
+						+ ", C = cima, B = baixo)");					
+				direcao = scanf.next();
+				aux.anda(direcao, linhas, colunas);
+				System.out.print(", onde há ");
+
+				if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == gramado) {
+					System.out.println("grama");
+				}
+
+				else if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == comum) {
+					System.out.println("chão");
+				}
+
+				addEvent(new Select(esponja,0));
+				addEvent(new Select(selvagem,0));
+				addEvent(new Acao(esponja,atacar, 0,selvagem,item,0,true));
+				addEvent(new Acao(esponja,trocar, 1,selvagem,trocar,0,false));
 			}
-
-			else if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == comum) {
-				System.out.println("chão");
-			}
-
-			addEvent( new Restart(System.currentTimeMillis() ) );
 		}
 
 		public Restart(long time) {
