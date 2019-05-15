@@ -2,16 +2,15 @@ package game;
 import java.util.Random;
 
 public class Tile {
-	public static final boolean comum = false;
-	public static final boolean gramado = true;
+	public final boolean comum = false;
+	public final boolean gramado = true;
 
-	public static final int direita = 1, cima = 2;
-	public static final int esquerda = 3, baixo = 4;
+	public final int direita = 1, cima = 2;
+	public final int esquerda = 3, baixo = 4;
 
 	private boolean tipo;
 	private static int atual_lin;
 	private static int atual_col;
-
 
 	public Tile() {
 		Random rand = new Random();
@@ -29,7 +28,7 @@ public class Tile {
 		return tipo;
 	}
 
-	public static Tile[][] criaMapa(int linhas, int colunas) {
+	public Tile[][] criaMapa(int linhas, int colunas) {
 		Tile[][] mapa = new Tile[linhas][colunas]; 
 		for(int i = 0; i < linhas; i++) {
 			for(int j = 0; j < colunas; j++) {
@@ -45,7 +44,7 @@ public class Tile {
 		return mapa;
 	}
 
-	public static void anda(int direcao, int linhas, int colunas) {
+	public void anda(int direcao, int linhas, int colunas) {
 		System.out.println("\nMovido da posicao (" + atual_lin + ", " 
 				+ atual_col + ")");
 

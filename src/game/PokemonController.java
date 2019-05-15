@@ -147,10 +147,12 @@ public class PokemonController extends Controller{
 			addEvent(new Acao(esponja,2, 1,construtor,0,0,false)); */	
 			
 			Tile[][] mapa;
-			mapa = Tile.criaMapa(30, 30);
+			Tile aux = new Tile();
+			
+			mapa = aux.criaMapa(30, 30);
 			for(int i = 0; i < 5; i++) {
 				for(int j = 0; j < 10; j++) {
-					Tile.anda(direita, 30, 30);
+					aux.anda(direita, 30, 30);
 					System.out.print("Onde há ");
 					
 					if(mapa[i][j].tipo() == gramado) {
@@ -160,7 +162,7 @@ public class PokemonController extends Controller{
 						System.out.println("chão");
 					}
 				}
-				Tile.anda(baixo, 30, 30);
+				aux.anda(baixo, 30, 30);
 			}
 
 		}
