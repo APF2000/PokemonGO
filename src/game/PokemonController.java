@@ -112,6 +112,7 @@ public class PokemonController extends Controller{
 			
 			
 			// Esqueleto do jogo de verdade
+			/*
 			System.out.println("Adicione 2 Pokemons");
 			for(int i = 0; i < 2; i++) {
 				poke = scanf.nextLine();
@@ -121,9 +122,11 @@ public class PokemonController extends Controller{
 			System.out.println("Adicione 2 Pokemons vc tbm");
 			for(int i = 0; i < 2; i++) {
 				poke = scanf.nextLine();
-				construtor.addPoke(poke);
+				construtor.addPoke(poke)
+			
 			}
-			/*esponja.addPoke(new Pikachu());
+			*/
+			esponja.addPoke(new Pikachu());
 			esponja.addPoke(new Gyarados());
 			esponja.addPoke(new Gardevoir());
 			esponja.addPoke(new Caterpie());
@@ -135,7 +138,7 @@ public class PokemonController extends Controller{
 			construtor.addPoke(new Rattata());
 			construtor.addPoke(new Raychu());
 			construtor.addPoke(new Cubone());
-			construtor.addPoke(new Ekans()); */
+			construtor.addPoke(new Ekans());
 
 			System.out.println("\nCOMECOU A BATALHA\n");
 			addEvent(new Select(esponja,0));
