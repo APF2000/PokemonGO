@@ -3,9 +3,7 @@ package game;
 public class Controller {
 	private EventSet es = new EventSet();
 	
-	public Controller() {
-		System.out.println("Controller");
-	}
+	public Controller() {}
 	
 	public void addEvent(Event c) { 
 		es.add(c);
