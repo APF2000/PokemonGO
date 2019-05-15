@@ -1,4 +1,5 @@
 package game;
+import java.util.Random;
 
 import pokemons.Bubasauro;
 import pokemons.Caterpie;
@@ -118,7 +119,7 @@ public class PokemonController extends Controller{
 			return "";
 		}
 
-		private Treinador esponja = new Treinador("Bob esponja", true);
+		private Treinador jogador = new Treinador("Você", true);
 		private Treinador selvagem = new Treinador("Pokemon Selvagem", false);
 
 
@@ -134,7 +135,7 @@ public class PokemonController extends Controller{
 			System.out.println("Adicione " + n + " Pokemons à pokedex");
 			for(int i = 0; i < n; i++) {
 				poke = scanf.nextLine();
-				esponja.addPoke(poke);
+				jogador.addPoke(poke);
 			}
 
 			selvagem.addPoke("Gardevoir");
@@ -155,7 +156,7 @@ public class PokemonController extends Controller{
 			mapa = aux.criaMapa(linhas, colunas);
 
 			while(System.currentTimeMillis() - tm <= 10E8) {
-				System.out.print("Pra qual lado você vai? (D = direita, E = esquerda"
+				System.out.print("\nPra qual lado você vai? (D = direita, E = esquerda"
 						+ ", C = cima, B = baixo)");					
 				direcao = scanf.next();
 				aux.anda(direcao, linhas, colunas);
@@ -163,16 +164,48 @@ public class PokemonController extends Controller{
 
 				if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == gramado) {
 					System.out.println("grama");
+					
+
+					Random rand = new Random();
+					
+					// random fica com um numero entre 0 e 10
+					// queremos que a probabilidade de surgir
+					// um poquemon selvagem seja de 10%
+					int random = rand.nextInt(11);
+					random = rand.nextInt(11);
+					if(random % 10 != 0) {
+						System.out.println("\nOh não, um pokemon selvagem!!");
+						int acao_jogador = 0;
+						int sel_jogador = 0;
+						
+						while( (jogador.proxComHp() != -1 && selvagem.proxComHp() != -1) 
+									&& acao_jogador != fugir) {
+							
+							System.out.println("Atacar = 0, Item = 1, TrocarPoke = 2, Fugir = 3, ");
+							acao_jogador = scanf.nextInt();
+
+							if(acao_jogador == atacar) {
+								System.out.println("Ataques disponíveis:");
+								jogador.selectedPoke().listaAtaques();
+								sel_jogador = scanf.nextInt();								
+							}
+							else if(acao_jogador == item) {
+								sel_jogador = scanf.nextInt();								
+							}
+							else if(acao_jogador == trocar) {
+								sel_jogador = scanf.nextInt();								
+							}
+							
+							addEvent(new Acao(jogador,acao_jogador, sel_jogador,selvagem,item,0,true));
+
+							System.out.println("EAEMEN ");
+						}
+					}
 				}
 
 				else if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == comum) {
 					System.out.println("chão");
 				}
-
-				addEvent(new Select(esponja,0));
-				addEvent(new Select(selvagem,0));
-				addEvent(new Acao(esponja,atacar, 0,selvagem,item,0,true));
-				addEvent(new Acao(esponja,trocar, 1,selvagem,trocar,0,false));
 			}
 		}
 

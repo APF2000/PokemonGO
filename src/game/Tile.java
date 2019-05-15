@@ -21,7 +21,6 @@ public class Tile {
 		int random = rand.nextInt(7);
 		random = rand.nextInt(7);
 		tipo = (random % 6 == 0);
-		//System.out.println("random % 6 == " + random % 6 + " " + (random%6==0));
 	}
 
 	public boolean tipo() {
@@ -40,12 +39,14 @@ public class Tile {
 		Random rand = new Random();
 		atual_lin = rand.nextInt(linhas);
 		atual_col = rand.nextInt(colunas);
+		
+		System.out.println("(Você) surgiu em (" + atual_lin + ", " + atual_col + ")");
 
 		return mapa;
 	}
 
 	public void anda(String direcao, int linhas, int colunas) {
-		System.out.print("\nMovido da posicao (" + atual_lin + ", " 
+		System.out.print("Movido da posicao (" + atual_lin + ", " 
 				+ atual_col + ")");
 
 		if(direcao.equalsIgnoreCase(direita)) {

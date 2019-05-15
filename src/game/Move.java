@@ -12,7 +12,9 @@ public class Move {
 		//System.out.println(dano);
 		return(dano);
 	}
-	public String name() {
+	public String getNome() {
 		return(nome);
 	}
+	
+	
 }

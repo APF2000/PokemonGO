@@ -41,7 +41,6 @@ public class Treinador {
 			for(int i = 0; i < 5; i++) {
 				inventario[i] = new Move("Casca de banana", 10);
 			}
-			System.out.println("NASCE UM INIMIGO");
 		}
 	}
 
@@ -53,11 +52,11 @@ public class Treinador {
 			return(false);
 		}
 	}
-	private int proxComHp() {
+	public int proxComHp() {
 
 		for(int i=0; i<6; i++) {
-			if(pokedex[i].getHP()>0){
-				if(pokedex[selecao].getHP()<0)
+			if(pokedex[i].getHp()>0){
+				if(pokedex[selecao].getHp()<0)
 					selecao=i;
 				return(i);
 			}
@@ -114,7 +113,7 @@ public class Treinador {
 		}
 		else {
 			System.out.println("Erro: invetario cheio. Nao foi possivel adicionar "
-					+ item.name());
+					+ item.getNome());
 		}
 	}
 
@@ -124,9 +123,18 @@ public class Treinador {
 			inventario[num_item]=inventario[num_item+1];
 		}
 		return("(" + nome + ") usou "
-				+ inventario[num_item].name())+ " em " + alvo.getNome();
+				+ inventario[num_item].getNome())+ " em " + alvo.getNome();
 	}
 
+	public String movimentoPoke (int num_mov,Pokemon alvo) {
+		String saida;
+		//System.out.println("teste: " + selecao);
+		saida = pokedex[selecao].action(num_mov, alvo);
+		return("(" + nome + ") usou " + 
+				pokedex[selecao].getNome() + " para atacar o adversario com "
+				+ saida+"\n");
+	}
+	
 	public String movimentoSelect(int sel1, int sel2, Pokemon alvo) {
 
 		// sel1 diz que tipo de acao sera tomada(ataque, usar item, fugir ou trocar pokemon
@@ -156,16 +164,5 @@ public class Treinador {
 		}
 
 		return(saida);
-	}
-
-
-
-	public String movimentoPoke (int num_mov,Pokemon alvo) {
-		String saida;
-		//System.out.println("teste: " + selecao);
-		saida = pokedex[selecao].action(num_mov, alvo);
-		return("(" + nome + ") usou " + 
-				pokedex[selecao].getNome() + " para atacar o adversario com "
-				+ saida+"\n");
 	}
 }
