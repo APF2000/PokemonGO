@@ -5,19 +5,12 @@ import pokemons.Charmander;
 import pokemons.Cubone;
 import pokemons.Ekans;
 import pokemons.Gardevoir;
-import pokemons.Geodude;
 import pokemons.Gyarados;
 import pokemons.Pidgeot;
-import pokemons.Pidgey;
 import pokemons.Pikachu;
-import pokemons.Poliwrath;
-import pokemons.Raticate;
 import pokemons.Rattata;
 import pokemons.Raychu;
-import pokemons.Sandshrew;
 import pokemons.Spearow;
-import pokemons.Squirtle;
-import pokemons.Weedle;
 
 public class Treinador{
 	// Treinadores podem ser Pokemons sozinhos
@@ -82,27 +75,20 @@ public class Treinador{
 		return;
 	}
 	public Pokemon whichPoke(String poke) {
-		Pokemon[] list = new Pokemon[19];
+		Pokemon[] list = new Pokemon[12];
 
-		list[0] = new Weedle();
+		list[0] = new Spearow();
 		list[1] = new Bubasauro();
 		list[2] = new Caterpie();
 		list[3] = new Charmander();
 		list[4] = new Cubone();
 		list[5] = new Ekans();
 		list[6] = new Gardevoir();
-		list[7] = new Geodude();
-		list[8] = new Gyarados();
-		list[9] = new Pidgeot();
-		list[10] = new Pidgey();
-		list[11] = new Pikachu();
-		list[12] = new Poliwrath();
-		list[13] = new Raticate();
-		list[14] = new Rattata();
-		list[15] = new Raychu();
-		list[16] = new Sandshrew();
-		list[17] = new Spearow();
-		list[18] = new Squirtle();
+		list[7] = new Gyarados();
+		list[8] = new Pidgeot();
+		list[9] = new Pikachu();
+		list[10] = new Rattata();
+		list[11] = new Raychu();
 
 
 		for(int i = 0; i < 19; i++) {
