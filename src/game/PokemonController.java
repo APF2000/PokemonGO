@@ -24,6 +24,12 @@ public class PokemonController extends Controller{
 	public PokemonController() {
 		super();
 	}
+
+	public void addEvent() {
+		System.out.println("Evento adicionado");
+	}
+	
+	
 	private class Select extends Event{
 		private String saida;
 		Treinador a = new Treinador("Esponja", true);
@@ -104,6 +110,9 @@ public class PokemonController extends Controller{
 
 	private class Restart extends Event {
 
+		public Restart() {
+			System.out.print("COERAPAZIADA");
+		}
 		public String description() {
 			return "";
 		}
@@ -114,6 +123,7 @@ public class PokemonController extends Controller{
 
 		public void prioridade() {
 			long tm = System.currentTimeMillis();
+			
 			Scanner scanf = new Scanner(System.in);
 			String poke;
 
@@ -126,21 +136,7 @@ public class PokemonController extends Controller{
 				esponja.addPoke(poke);
 			}
 
-			/*esponja.addPoke(new Pikachu());
-			esponja.addPoke(new Gyarados());
-			esponja.addPoke(new Gardevoir());
-			esponja.addPoke(new Caterpie());
-			esponja.addPoke(new Pidgeot());
-			esponja.addPoke(new Spearow());
-
-			construtor.addPoke(new Bubasauro());
-			construtor.addPoke(new Charmander());
-			construtor.addPoke(new Rattata());
-			construtor.addPoke(new Raychu());
-			construtor.addPoke(new Cubone());
-			construtor.addPoke(new Ekans()); 
-
-			System.out.println("\nCOMECOU A BATALHA\n");
+			/*System.out.println("\nCOMECOU A BATALHA\n");
 			addEvent(new Select(esponja,0));
 			addEvent(new Select(construtor,0));
 			addEvent(new Acao(esponja,0, 0,construtor,2,1,true));
@@ -167,19 +163,14 @@ public class PokemonController extends Controller{
 			else if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == comum) {
 				System.out.println("chão");
 			}
-			aux.anda(baixo, 30, 30);
-			
-			Restart res = new Restart(System.currentTimeMillis() + 1000);
+
+			addEvent( new Restart(System.currentTimeMillis() ) );
 		}
 
 		public Restart(long time) {
 			super(time);
 		}
 
-	}
-
-	public void addEvent() {
-		System.out.println("Evento adicionado");
 	}
 
 	public static void main(String[] args) {

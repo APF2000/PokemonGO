@@ -6,12 +6,14 @@ class EventSet {
 	private Event[] events = new Event[100];
 	private int index = 0;
 	private int next = 0;
+	
 	public void add(Event e) {
 		if(index >= events.length)
 			return; // (In real life, throw exception)
 
 		events[index++] = e;
 	}
+	
 	public Event getNext() {
 		boolean looped = false;
 		int start = next;

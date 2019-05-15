@@ -4,7 +4,7 @@ public class Controller {
 	private EventSet es = new EventSet();
 	
 	public Controller() {
-		//System.out.println("Controller");
+		System.out.println("Controller");
 	}
 	
 	public void addEvent(Event c) { 
