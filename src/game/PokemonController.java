@@ -173,7 +173,7 @@ public class PokemonController extends Controller{
 	}
 
 	public void addEvent() {
-		System.out.println("Evento adicionado");
+		//System.out.println("Evento adicionado");
 	}
 
 	public static void main(String[] args) {
