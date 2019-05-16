@@ -29,7 +29,7 @@ public class PokemonController extends Controller{
 	}
 
 	public void addEvent() {
-		System.out.println("Evento adicionado");
+		System.out.("Evento adicionado");
 	}
 
 
@@ -70,6 +70,9 @@ public class PokemonController extends Controller{
 				
 		}
 		public boolean nojogo() {
+			
+			nojogo1 = a.noJogo();
+			nojogo2 = b.noJogo();
 			if( (!nojogo1) || (!nojogo2) ){
 				return(false);
 			}
@@ -192,7 +195,7 @@ public class PokemonController extends Controller{
 
 			// Esqueleto do jogo de verdade
 			int n = 3;
-			System.out.println("Adicione " + n + " Pokemons à pokedex");
+			System.out.("Adicione " + n + " Pokemons à pokedex");
 			for(int i = 0; i < n; i++) {
 				poke = scanf.nextLine();
 				jogador.addPoke(poke);
@@ -218,7 +221,7 @@ public class PokemonController extends Controller{
 				System.out.print(", onde há ");
 
 				if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == gramado) {
-					System.out.println("grama");
+					System.out.("grama");
 				}
 
 				Random rand = new Random();
@@ -229,18 +232,18 @@ public class PokemonController extends Controller{
 				int random = rand.nextInt(11);
 				random = rand.nextInt(11);
 				if(random % 10 != 0) {
-					System.out.println("\nOh não, um pokemon selvagem!!");
+					System.out.("\nOh não, um pokemon selvagem!!");
 					int acao_jogador = 0;
 					int sel_jogador = 0;
 
 					while( (jogador.proxComHp() != -1 && selvagem.proxComHp() != -1) 
 							&& acao_jogador != fugir) {
 
-						System.out.println("Atacar = 0, Item = 1, TrocarPoke = 2, Fugir = 3, ");
+						System.out.("Atacar = 0, Item = 1, TrocarPoke = 2, Fugir = 3, ");
 						acao_jogador = scanf.nextInt();
 
 						if(acao_jogador == atacar) {
-							System.out.println("Ataques disponíveis:");
+							System.out.("Ataques disponíveis:");
 							jogador.selectedPoke().listaAtaques();
 							sel_jogador = scanf.nextInt();								
 						}
@@ -256,7 +259,7 @@ public class PokemonController extends Controller{
 					}
 				}
 				else if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == comum) {
-					System.out.println("chão");
+					System.out.("chão");
 				}
 				for(int i=0;i<100;i++)
 					addEvent(new Acao(jogador,0, 0,selvagem,item,0,true));
@@ -281,7 +284,6 @@ public class PokemonController extends Controller{
 			
 			addEvent(new Status(a,b));
 			if((new Status(a,b)).nojogo()){
-				System.out.println((new Status(a,b)).nojogo());
 				addEvent(new Acao(a,0, 1,true,b, 0,0,true));
 				addEvent(new Parte1_evento(a,b));
 			}
