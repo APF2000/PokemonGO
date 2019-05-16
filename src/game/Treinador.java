@@ -45,18 +45,20 @@ public class Treinador {
 	}
 
 	public boolean noJogo() {
-		if(proxComHp()!=-1) {
-			return(nojogo);
+		if(proxComHp()==-1) {
+			System.out.println(nome +" foi derrotado");
+			nojogo=false;
+
 		}
-		else {
-			return(false);
-		}
+		return(nojogo);
 	}
 	public int proxComHp() {
 
 		for(int i=0; i<6; i++) {
 			if(pokedex[i].getHp()>0){
-				if(pokedex[selecao].getHp()<0)
+				if(pokedex[selecao].getHp()<=0)
+					System.out.println(pokedex[selecao].getNome() + " de " + nome +" saiu do jogo\n" +
+				pokedex[i].getNome() + " foi selecionado");
 					selecao=i;
 				return(i);
 			}
@@ -130,10 +132,15 @@ public class Treinador {
 	public String movimentoPoke (int num_mov,Pokemon alvo) {
 		String saida;
 		//System.out.println("teste: " + selecao);
-		saida = pokedex[selecao].action(num_mov, alvo);
-		return("(" + nome + ") usou " + 
-				pokedex[selecao].getNome() + " para atacar o adversario com "
-				+ saida+"\n");
+		if(alvo.getHp()>0) {
+			saida = pokedex[selecao].action(num_mov, alvo);
+			return("(" + nome + ") usou " + 
+					pokedex[selecao].getNome() + " para atacar o adversario com "
+					+ saida+"\n");
+		}
+		else {
+			return("Não foi possivel atacar");
+		}
 		
 	}
 	

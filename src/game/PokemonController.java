@@ -54,6 +54,35 @@ public class PokemonController extends Controller{
 		}
 
 	}
+	private class Status extends Event {
+		private Treinador a;
+		private Treinador b;
+		
+		private boolean nojogo1=true;
+		private boolean nojogo2=true;
+		public Status(Treinador a, Treinador b){
+			this.a = a;
+			this.b = b;
+		}
+		public void prioridade() {
+			nojogo1 = a.noJogo();
+			nojogo2 = b.noJogo();
+				
+		}
+		public boolean nojogo() {
+			if( (!nojogo1) || (!nojogo2) ){
+				return(false);
+			}
+			return(true);
+				
+		}
+
+		public String description() {
+			return("-------------------------------------\n" 
+					+ a.selectedPoke().getNome() +  " HP " + a.selectedPoke().getHp()+"\n"+
+					b.selectedPoke().getNome() +  " HP " + b.selectedPoke().getHp());
+		}
+	}
 	private class Acao extends Event{
 		Treinador a;
 		Treinador b;
@@ -62,57 +91,83 @@ public class PokemonController extends Controller{
 		int sel_t1=0;
 		int acao_t2=0;
 		int sel_t2=0;
-		boolean alvo;//true: alvo é o inimigo / false: o alvo é ele mesmo 
+		boolean alvo1;//true: alvo é o inimigo / false: o alvo é ele mesmo 
+		boolean alvo2;
 
-		public Acao(Treinador a, int acao_t1, int sel_t1, 
-				Treinador b,  int acao_t2, int sel_t2, boolean alvo) {
+		public Acao(Treinador a, int acao_t1, int sel_t1,boolean alvo1, 
+				Treinador b,  int acao_t2, int sel_t2, boolean alvo2) {
 			this.a = a;
 			this.b = b;
 			this.acao_t1 = acao_t1;
 			this.sel_t1 = sel_t1;
-			
+			this.alvo1 = alvo1;
+
 			this.acao_t2 = acao_t2;
 			this.sel_t2 = sel_t2;
-			
+			this.alvo2 = alvo2;
+
+
 		}
 
 		public void prioridade() {
-			
-			
+
+
 
 			if(acao_t1>acao_t2) {
-				if(alvo==true) {
+				if(alvo1==true) {
+
 					move += a.movimentoSelect(acao_t1,sel_t1,b.selectedPoke());	
-					move += b.movimentoSelect(acao_t2,sel_t2,a.selectedPoke());
+
+					if(alvo2==true)
+						move += b.movimentoSelect(acao_t2,sel_t2,a.selectedPoke());
+					else
+						move += b.movimentoSelect(acao_t2,sel_t2,b.selectedPoke());	
 				}
 				else {
 					move += a.movimentoSelect(acao_t1,sel_t1,a.selectedPoke());	
-					move += b.movimentoSelect(acao_t2,sel_t2,b.selectedPoke());	
+
+					if(alvo2==true)
+
+						move += b.movimentoSelect(acao_t2,sel_t2,a.selectedPoke());
+					else
+
+						move += b.movimentoSelect(acao_t2,sel_t2,b.selectedPoke());	
 				}
 
 			}
 			else {
-				if(alvo==true) {
+				if(alvo2==true) {
+
 					move += b.movimentoSelect(acao_t2,sel_t2,a.selectedPoke());
-					move += a.movimentoSelect(acao_t1,sel_t1,b.selectedPoke());	
+
+					if(alvo1==true) {
+
+						move += a.movimentoSelect(acao_t1,sel_t1,b.selectedPoke());	
+
+					}
+					else {
+						move += a.movimentoSelect(acao_t1,sel_t1,a.selectedPoke());	
+					}
 				}
 				else {
+
 					move += b.movimentoSelect(acao_t2,sel_t2,b.selectedPoke());
-					move += a.movimentoSelect(acao_t1,sel_t1,a.selectedPoke());		
+
+					if(alvo1==true) {
+						move += a.movimentoSelect(acao_t1,sel_t1,b.selectedPoke());	
+					}
+					else {
+						move += a.movimentoSelect(acao_t1,sel_t1,a.selectedPoke());	
+					}		
 				}
 			}
-		
-			String vida = "\n" + a.selectedPoke().getNome() +  " HP " + a.selectedPoke().getHp()+"\n"+
-					b.selectedPoke().getNome() +  " HP " + b.selectedPoke().getHp();
-			System.out.println(move+vida);
+
+			
+			System.out.println(move);
 		}
 		public String description() {
-			
+
 			return("");
-			/*return ("(" + a.getNome() + ") usou " + 
-					a.selPoke().getNome() + " para atacar o "
-					+ b.selPoke().getNome()+" de ("+ b.getNome() + ") com " + move);
-			 */
 		}
 
 	}
@@ -145,11 +200,6 @@ public class PokemonController extends Controller{
 
 			selvagem.addPoke("Gardevoir");
 
-			/*System.out.println("\nCOMECOU A BATALHA\n");
-			addEvent(new Select(esponja,0));
-			addEvent(new Select(construtor,0));
-			addEvent(new Acao(esponja,0, 0,construtor,2,1,true));
-			addEvent(new Acao(esponja,2, 1,construtor,0,0,false)); */	
 
 			Tile[][] mapa;
 			Tile aux = new Tile();
@@ -201,30 +251,85 @@ public class PokemonController extends Controller{
 							sel_jogador = scanf.nextInt();								
 						}
 
-						addEvent(new Acao(jogador,acao_jogador, sel_jogador,selvagem,item,0,true));
+						addEvent(new Acao(jogador,acao_jogador, sel_jogador,true,selvagem,item,0,true));
 
 					}
 				}
-			else if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == comum) {
-				System.out.println("chão");
+				else if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == comum) {
+					System.out.println("chão");
+				}
+				for(int i=0;i<100;i++)
+					addEvent(new Acao(jogador,0, 0,selvagem,item,0,true));
 			}
-			for(int i=0;i<100;i++)
-				addEvent(new Acao(jogador,0, 0,selvagem,item,0,true));
+		}
+
+		public Restart(long time) {
+			super(time);
+		}
+
+	}private class Parte1_evento extends Event {
+		
+		Treinador a;
+		Treinador b;
+		
+		public Parte1_evento(Treinador a, Treinador b) {
+			this.a=a;
+			this.b=b;
+		}
+		
+		public void prioridade() {
+			
+			addEvent(new Status(a,b));
+			if((new Status(a,b)).nojogo()){
+				System.out.println((new Status(a,b)).nojogo());
+				addEvent(new Acao(a,0, 1,true,b, 0,0,true));
+				addEvent(new Parte1_evento(a,b));
+			}
+		}
+		public String description() {
+			return "";
+		}
+	}
+	
+	private class Parte1 extends Event {
+
+		public Parte1() {}
+		public String description() {
+			return "";
+		}
+
+
+
+		public void prioridade() {
+			Treinador esponja = new Treinador("Bob Esponja",true);
+			Treinador construtor = new Treinador("Bob, o Contrutor",true);
+
+			esponja.addPoke("Pikachu");
+			esponja.addPoke("Gyarados");
+			esponja.addPoke("Gardevoir");
+			esponja.addPoke("Pidgeot");
+			esponja.addPoke("Spearow");
+			esponja.addPoke("Cubone");
+
+			construtor.addPoke("Charmander");
+			construtor.addPoke("Ekans");
+			construtor.addPoke("Rattata");
+			construtor.addPoke("Bubasauro");
+			construtor.addPoke("Raychu");
+			construtor.addPoke("Caterpie");
+			
+			addEvent(new Parte1_evento(esponja,construtor));
+			
+			
 		}
 	}
 
-	public Restart(long time) {
-		super(time);
+	public static void main(String[] args) {
+
+		PokemonController poke = new PokemonController();
+		long tm = System.currentTimeMillis();
+		poke.addEvent(poke.new Parte1());
+		poke.run();
 	}
-
-}
-
-public static void main(String[] args) {
-
-	PokemonController poke = new PokemonController();
-	long tm = System.currentTimeMillis();
-	poke.addEvent(poke.new Restart(tm));
-	poke.run();
-}
 
 }

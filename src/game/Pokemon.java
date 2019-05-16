@@ -14,6 +14,8 @@ abstract public class Pokemon {
 	}
 	public void attackDamage (int dano) {
 		hp -= dano; 
+		if(hp<0)
+			hp=0;
 	}
 	public String getNome() {
 		return(nome);

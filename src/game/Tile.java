@@ -78,23 +78,4 @@ public class Tile {
 		return atual_col;
 	}
 
-	/*public static void main(String[] args) {
-		Tile[][] mapa;
-		mapa = criaMapa(30, 30);
-		for(int i = 0; i < 30; i++) {
-			for(int j = 0; j < 30; j++) {
-				Tile.anda(direita, 30, 30);
-				System.out.print("Onde há ");
-
-				if(mapa[i][j].tipo() == gramado) {
-					System.out.println("grama");
-				}
-				else if(mapa[i][j].tipo() == comum) {
-					System.out.println("chão");
-				}
-			}
-			Tile.anda(baixo, 30, 30);
-		}
-	}
-	 */
 }
