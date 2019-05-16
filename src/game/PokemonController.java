@@ -66,17 +66,19 @@ public class PokemonController extends Controller{
 
 		public Acao(Treinador a, int acao_t1, int sel_t1, 
 				Treinador b,  int acao_t2, int sel_t2, boolean alvo) {
-			this.a=a;
-			this.b=b;
-
-			this.acao_t1=acao_t1;
-			this.sel_t1=sel_t1;
-
-			this.acao_t2=acao_t2;
-			this.sel_t2=sel_t2;
+			this.a = a;
+			this.b = b;
+			this.acao_t1 = acao_t1;
+			this.sel_t1 = sel_t1;
+			
+			this.acao_t2 = acao_t2;
+			this.sel_t2 = sel_t2;
+			
 		}
 
 		public void prioridade() {
+			
+			
 
 			if(acao_t1>acao_t2) {
 				if(alvo==true) {
@@ -99,11 +101,14 @@ public class PokemonController extends Controller{
 					move += a.movimentoSelect(acao_t1,sel_t1,a.selectedPoke());		
 				}
 			}
+		
+			String vida = "\n" + a.selectedPoke().getNome() +  " HP " + a.selectedPoke().getHp()+"\n"+
+					b.selectedPoke().getNome() +  " HP " + b.selectedPoke().getHp();
+			System.out.println(move+vida);
 		}
-
 		public String description() {
-
-			return(move);
+			
+			return("");
 			/*return ("(" + a.getNome() + ") usou " + 
 					a.selPoke().getNome() + " para atacar o "
 					+ b.selPoke().getNome()+" de ("+ b.getNome() + ") com " + move);
@@ -131,42 +136,12 @@ public class PokemonController extends Controller{
 
 
 			// Esqueleto do jogo de verdade
-			/*
-			System.out.println("Adicione 2 Pokemons");
-			for(int i = 0; i < 2; i++) {
 			int n = 3;
 			System.out.println("Adicione " + n + " Pokemons à pokedex");
 			for(int i = 0; i < n; i++) {
 				poke = scanf.nextLine();
 				jogador.addPoke(poke);
 			}
-
-			System.out.println("Adicione 2 Pokemons vc tbm");
-			for(int i = 0; i < 2; i++) {
-				poke = scanf.nextLine();
-				construtor.addPoke(poke)
-			
-			}
-			*/
-			esponja.addPoke(new Pikachu());
-
-			/*esponja.addPoke(new Pikachu());
->>>>>>> 526e24e6068f66f3e3ee1e6e9122ace79053a800
-			esponja.addPoke(new Gyarados());
-			esponja.addPoke(new Gardevoir());
-			esponja.addPoke(new Caterpie());
-			esponja.addPoke(new Pidgeot());
-			esponja.addPoke(new Spearow());
-
-			construtor.addPoke(new Bubasauro());
-			construtor.addPoke(new Charmander());
-			construtor.addPoke(new Rattata());
-			construtor.addPoke(new Raychu());
-			construtor.addPoke(new Cubone());
-			construtor.addPoke(new Ekans());
-
-			System.out.println("\nCOMECOU A BATALHA\n");
-=======
 
 			selvagem.addPoke("Gardevoir");
 
@@ -185,7 +160,7 @@ public class PokemonController extends Controller{
 
 			mapa = aux.criaMapa(linhas, colunas);
 
-			while(System.currentTimeMillis() - tm <= 10E8) {
+			while(System.currentTimeMillis() - tm <= 30000) {
 				System.out.print("\nPra qual lado você vai? (D = direita, E = esquerda"
 						+ ", C = cima, B = baixo)");					
 				direcao = scanf.next();
@@ -228,16 +203,13 @@ public class PokemonController extends Controller{
 
 						addEvent(new Acao(jogador,acao_jogador, sel_jogador,selvagem,item,0,true));
 
-						System.out.println("EAEMEN ");
 					}
 				}
-			}
-
-
 			else if(mapa[ aux.atualLin() ][ aux.atualCol() ].tipo() == comum) {
 				System.out.println("chão");
 			}
-
+			for(int i=0;i<100;i++)
+				addEvent(new Acao(jogador,0, 0,selvagem,item,0,true));
 		}
 	}
 

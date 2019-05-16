@@ -134,6 +134,7 @@ public class Treinador {
 		return("(" + nome + ") usou " + 
 				pokedex[selecao].getNome() + " para atacar o adversario com "
 				+ saida+"\n");
+		
 	}
 	
 	public String movimentoSelect(int sel1, int sel2, Pokemon alvo) {
@@ -143,6 +144,7 @@ public class Treinador {
 		String saida="Error 404-classe: treinador";
 
 		// Ataque
+		
 		if(sel1 == atacar) {
 			saida = movimentoPoke (sel2,alvo);
 		}

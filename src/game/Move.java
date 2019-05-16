@@ -15,4 +15,7 @@ public class Move {
 	public String getNome() {
 		return(nome);
 	}
+	public int getDano() {
+		return(dano);
+	}
 }

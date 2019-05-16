@@ -12,7 +12,6 @@ public class Caterpie extends Pokemon {
 		ataques[1]=new Move("Pega e atira",10);
 		ataques[2]=new Move("Voo neurotico",10);
 		ataques[3]=new Move("Rasante",10);
-
 		tipo = "Bug";
 	}
 }
